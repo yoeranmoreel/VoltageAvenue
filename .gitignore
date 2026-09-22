@@ -1,0 +1,17 @@
+
+# Lokale macOS-bestanden
+.DS_Store
+
+# Interne bandbestanden
+*.xlsx
+*.xls
+*.wav
+*.mov
+*.xcf
+
+# Technische riders blijven voorlopig privé
+*Rider*.pdf
+*rider*.pdf
+
+# Eventuele lokale werkmappen
+node_modules/

@@ -1,0 +1,793 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --orange: #ff812b;
+    --black: #101010;
+    --white: #fff;
+    --muted: #c9c9c9
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px
+}
+
+body {
+    margin: 0;
+    background: var(--black);
+    color: var(--white);
+    font: 16px/1.65 Roboto, Arial, sans-serif
+}
+
+a {
+    color: inherit
+}
+
+img {
+    max-width: 100%;
+    display: block
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0
+}
+
+h1,
+h2,
+h3 {
+    font-family: Montserrat, Arial, sans-serif;
+    line-height: 1.08
+}
+
+h2 {
+    font-size: clamp(2.7rem, 7vw, 5.4rem);
+    text-transform: uppercase;
+    letter-spacing: -.045em;
+    margin-bottom: 30px
+}
+
+h3 {
+    font-size: 1.6rem
+}
+
+.header {
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 82px;
+    padding: 10px clamp(18px, 5vw, 72px);
+    background: rgba(0, 0, 0, .88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #ffffff24
+}
+
+.brand img {
+    height: 62px;
+    width: 62px;
+    object-fit: contain
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.5vw, 38px)
+}
+
+.navigation a,
+.socials a,
+footer a {
+    text-decoration: none;
+    font-weight: 700
+}
+
+.navigation a:hover,
+.socials a:hover,
+footer a:hover,
+.text-link:hover {
+    color: var(--orange)
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: white;
+    border: 1px solid #fff6;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 1.5rem;
+    cursor: pointer
+}
+
+.hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 130px 20px 80px;
+    background: linear-gradient(180deg, #0008, #0005 50%, #000d), url('assets/images/Promo+foto+optie+2-1920w.png') center/cover no-repeat
+}
+
+.hero-content {
+    max-width: 1000px
+}
+
+.hero h1 {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    line-height: .88;
+    letter-spacing: -.07em;
+    text-shadow: 0 5px 35px #000a;
+    margin: 18px 0 26px
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 700;
+    letter-spacing: .24em;
+    font-size: .8rem
+}
+
+.hero .eyebrow {
+    color: #fff
+}
+
+.tagline {
+    font-weight: 700;
+    letter-spacing: .3em
+}
+
+.button {
+    display: inline-block;
+    background: var(--orange);
+    color: #101010;
+    padding: 13px 22px;
+    border: 2px solid var(--orange);
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 16px;
+    transition: transform .2s, background .2s
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    background: #ffa263
+}
+
+.button-outline {
+    background: transparent;
+    color: white
+}
+
+.button-outline:hover {
+    color: #101010
+}
+
+.section {
+    padding: clamp(80px, 11vw, 145px) 24px;
+    background: #191919
+}
+
+.section:nth-of-type(odd) {
+    background: #202020
+}
+
+.section-dark {
+    background: #101010 !important
+}
+
+.section-inner {
+    max-width: 1100px;
+    margin: auto
+}
+
+.section p {
+    max-width: 760px;
+    color: var(--muted)
+}
+
+.section .intro {
+    font-size: 1.35rem;
+    color: #fff
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 75px);
+    align-items: center
+}
+
+.feature-art {
+    aspect-ratio: 1;
+    background: url('assets/images/va+tiger+logo+transparant.png') center/70% no-repeat, #262626;
+    border: 1px solid #ffffff1a
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 30px 0
+}
+
+.gallery img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    background: #333
+}
+
+.text-link {
+    font-weight: 700;
+    text-decoration: none
+}
+
+.notice {
+    border-left: 4px solid var(--orange);
+    background: #ffffff0b;
+    padding: 30px;
+    max-width: 780px
+}
+
+.contact {
+    text-align: center
+}
+
+.contact .section-inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 50px
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 25px clamp(24px, 5vw, 72px);
+    font-size: .85rem;
+    background: #080808;
+    color: #bbb
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0
+}
+
+@media(max-width:720px) {
+    .header {
+        min-height: 72px
+    }
+
+    .brand img {
+        height: 50px;
+        width: 50px
+    }
+
+    .menu-toggle {
+        display: block
+    }
+
+    .navigation {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #101010;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 24px 24px;
+        border-bottom: 1px solid #fff3
+    }
+
+    .navigation.open {
+        display: flex
+    }
+
+    .navigation a {
+        padding: 12px;
+        border-bottom: 1px solid #ffffff18
+    }
+
+    .hero {
+        background-position: center
+    }
+
+    .hero h1 {
+        font-size: clamp(3.4rem, 14vw, 6rem)
+    }
+
+    .tagline {
+        letter-spacing: .12em
+    }
+
+    .feature,
+    .gallery {
+        grid-template-columns: 1fr
+    }
+
+    .gallery img {
+        height: 260px
+    }
+
+    .section {
+        padding: 80px 20px
+    }
+}
+
+/* Luisteren: Spotify-speler zonder grote Bruce */
+#luisteren .feature {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+
+/* Nieuwsbrief */
+.newsletter {
+    width: 100%;
+    max-width: 600px;
+    margin: 32px auto 0;
+}
+
+.newsletter iframe {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+}
+
+/* Nieuwsbrief: extra ruimte op mobiel */
+@media (max-width: 600px) {
+    .newsletter iframe {
+        height: 560px;
+    }
+}
+
+
+
+/* ========================================
+   ELECTRONIC PRESS KIT
+   Compact press & booking dossier
+======================================== */
+
+/* Algemene EPK-opmaak */
+
+.epk-page {
+    background: var(--black);
+}
+
+.epk-page .section {
+    padding-top: 85px;
+    padding-bottom: 85px;
+}
+
+.epk-page .section-inner {
+    width: min(1100px, calc(100% - 40px));
+    margin-inline: auto;
+}
+
+.epk-page h2 {
+    margin-bottom: 20px;
+}
+
+.epk-page h3 {
+    font-size: 1.3rem;
+}
+
+.epk-page .text-link {
+    display: inline-block;
+    color: var(--orange);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.epk-page .text-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   01 — OVERZICHT
+======================================== */
+
+.epk-overview {
+    padding: 145px 0 85px;
+    background: #171717;
+}
+
+.epk-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #ffffff30;
+}
+
+.epk-heading h1 {
+    margin: 12px 0 15px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5.3rem);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -.055em;
+}
+
+.epk-meta {
+    margin: 0;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .9rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    color: var(--muted);
+}
+
+.epk-meta span {
+    color: var(--orange);
+    margin: 0 8px;
+}
+
+.epk-heading>.button {
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+
+/* Foto en korte bandinformatie */
+
+.epk-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(30px, 5vw, 65px);
+    align-items: center;
+    margin-top: 45px;
+}
+
+.epk-summary-photo {
+    min-width: 0;
+    overflow: hidden;
+    background: #252525;
+}
+
+.epk-summary-photo img {
+    display: block;
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+}
+
+.epk-summary-content {
+    min-width: 0;
+}
+
+.epk-summary-content h2 {
+    margin-top: 8px;
+}
+
+.epk-summary-content .intro {
+    margin-bottom: 22px;
+}
+
+.epk-summary-content p:not(.eyebrow) {
+    line-height: 1.75;
+}
+
+.epk-summary-content .text-link {
+    margin-top: 12px;
+}
+
+
+/* ========================================
+   02 — MEDIA
+======================================== */
+
+.epk-media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 35px;
+}
+
+.epk-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 26px;
+    background: #202020;
+    border: 1px solid #ffffff20;
+}
+
+.epk-panel h3 {
+    margin: 8px 0 4px;
+}
+
+.epk-panel>p:not(.eyebrow) {
+    color: var(--muted);
+}
+
+.epk-panel .text-link {
+    margin-top: auto;
+    padding-top: 22px;
+}
+
+
+/* Spotify */
+
+.epk-spotify {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 12px;
+}
+
+
+/* YouTube */
+
+.epk-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: 22px;
+    overflow: hidden;
+    background: #000;
+    border-radius: 8px;
+}
+
+.epk-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+/* ========================================
+   03 — PRESS DOWNLOADS
+======================================== */
+
+.epk-resources {
+    display: grid;
+    gap: 14px;
+    margin-top: 35px;
+}
+
+.epk-resource {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 26px 30px;
+    background: #1d1d1d;
+    border: 1px solid #ffffff20;
+    border-left: 4px solid var(--orange);
+}
+
+.epk-resource>div {
+    min-width: 0;
+}
+
+.epk-resource .eyebrow {
+    margin-bottom: 8px;
+}
+
+.epk-resource h3 {
+    margin-bottom: 8px;
+}
+
+.epk-resource p:last-child {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+.epk-resource .button {
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   04 — BOOKING
+======================================== */
+
+.epk-contact {
+    text-align: center;
+    border-top: 1px solid #ffffff20;
+}
+
+.epk-contact .section-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.epk-contact .intro {
+    max-width: 650px;
+    margin-bottom: 28px;
+}
+
+.epk-contact .button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .epk-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .epk-summary-photo img {
+        height: auto;
+        max-height: 480px;
+    }
+
+    .epk-media-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .epk-page .section {
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+
+    .epk-overview {
+        padding-top: 115px;
+        padding-bottom: 65px;
+    }
+
+    .epk-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+    }
+
+    .epk-heading h1 {
+        font-size: clamp(2.35rem, 10vw, 4rem);
+    }
+
+    .epk-heading>.button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .epk-summary {
+        margin-top: 30px;
+        gap: 30px;
+    }
+
+    .epk-panel {
+        padding: 20px;
+    }
+
+    .epk-resource {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+        padding: 22px;
+    }
+
+    .epk-resource .button {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+/* EPK — knoppen bij logo-downloads */
+
+.epk-resource-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.epk-resource-actions .text-link {
+    width: 100%;
+    text-align: right;
+}
+
+@media (max-width: 650px) {
+
+    .epk-resource-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .epk-resource-actions .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .epk-resource-actions .text-link {
+        text-align: center;
+    }
+
+}
+
+
+/* EPK — één hoverkleur voor alle outline-knoppen */
+
+.epk-page .button-outline:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--black);
+}
+
+/* Homepage — verwijzing naar de EPK */
+
+
+.press-link {
+    padding: 20px 20px 50px;
+    text-align: center;
+    background: #1d1d1d;
+}
+
+
+.press-link p {
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.press-link a {
+    color: var(--orange);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.press-link a:hover {
+    text-decoration: underline;
+}
