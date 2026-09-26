@@ -58,11 +58,9 @@ h3 {
 }
 
 .header {
-    position: fixed;
-    z-index: 20;
+    position: sticky;
+    z-index: 1000;
     top: 0;
-    left: 0;
-    right: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -291,7 +289,7 @@ footer {
     border: 0
 }
 
-@media(max-width:720px) {
+@media(max-width:850px) {
     .header {
         min-height: 72px
     }
@@ -790,4 +788,1179 @@ footer {
 
 .press-link a:hover {
     text-decoration: underline;
+}
+
+/* ========================================
+   VOLTAGE AVENUE SHOP
+   ======================================== */
+
+.shop-page {
+    background: #0d0d0d;
+}
+
+
+/* ========================================
+   SHOP HERO
+   ======================================== */
+
+.shop-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #111;
+}
+
+/*
+   De afbeelding behoudt ALTIJD zijn originele
+   beeldverhouding en vult de volledige breedte.
+   Geen cover, geen crop.
+*/
+.shop-hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/*
+   Geen donkere overlay over de hero.
+*/
+.shop-hero-overlay {
+    display: none;
+}
+
+
+/* Hero tekst — desktop */
+
+.shop-hero-content {
+    position: absolute;
+    z-index: 2;
+
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+
+    width: min(1200px, calc(100% - 48px));
+}
+
+.shop-hero-content h1 {
+    max-width: 720px;
+    margin: 0 0 20px;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    font-weight: 900;
+    line-height: .86;
+    letter-spacing: -.065em;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 3px 15px rgba(0, 0, 0, .9),
+        0 8px 35px rgba(0, 0, 0, .65);
+}
+
+.shop-hero-content>p:not(.eyebrow) {
+    max-width: 540px;
+    margin-bottom: 12px;
+
+    color: #fff;
+    font-size: 1.05rem;
+
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .9);
+}
+
+
+/* ========================================
+   SHOP PRODUCTEN
+   ======================================== */
+
+.shop-products {
+    position: relative;
+
+    padding: clamp(85px, 10vw, 140px) 0;
+
+    background:
+        radial-gradient(circle at 50% 0%,
+            rgba(255, 129, 43, .09),
+            transparent 35%),
+        #111;
+}
+
+.shop-inner {
+    width: min(1200px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.shop-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.shop-heading h2 {
+    margin: 8px 0 0;
+}
+
+.shop-intro {
+    max-width: 390px;
+    margin: 0 0 10px;
+
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+
+/* ========================================
+   GLASS PRODUCT GRID
+   ======================================== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+
+/* ========================================
+   PRODUCT CARD
+   ======================================== */
+
+.product-card {
+    position: relative;
+    display: block;
+
+    min-width: 0;
+    overflow: hidden;
+
+    background:
+        linear-gradient(145deg,
+            rgba(255, 255, 255, .105),
+            rgba(255, 255, 255, .035));
+
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 18px;
+
+    box-shadow:
+        0 18px 55px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    color: var(--white);
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(255, 129, 43, .75);
+
+    box-shadow:
+        0 24px 65px rgba(0, 0, 0, .45),
+        0 0 35px rgba(255, 129, 43, .08),
+        inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+
+/* ========================================
+   PRODUCTAFBEELDING
+   ======================================== */
+
+.product-image {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(255, 129, 43, .12),
+            transparent 60%),
+        #181818;
+}
+
+.product-image img {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .4s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.035);
+}
+
+
+/* Placeholder wanneer productfoto nog ontbreekt */
+
+.product-placeholder {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    color: rgba(255, 255, 255, .34);
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .7rem;
+    font-weight: 800;
+
+    letter-spacing: .18em;
+    text-align: center;
+}
+
+
+/* ========================================
+   PRODUCTINFORMATIE
+   ======================================== */
+
+.product-info {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 25px 27px;
+}
+
+.product-info h3 {
+    margin: 4px 0 0;
+
+    font-size: 1.35rem;
+
+    transition: color .2s ease;
+}
+
+.product-card:hover .product-info h3 {
+    color: var(--orange);
+}
+
+.product-type {
+    margin: 0;
+
+    color: var(--orange);
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .67rem;
+    font-weight: 800;
+
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+
+/* Pijl rechts in productkaart */
+
+.product-arrow {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 50%;
+
+    font-size: 1.15rem;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.product-card:hover .product-arrow {
+    background: var(--orange);
+    border-color: var(--orange);
+
+    color: var(--black);
+
+    transform: rotate(8deg);
+}
+
+
+/* ========================================
+   THANK YOU / SUPPORT
+   ======================================== */
+
+.shop-note {
+    padding: clamp(90px, 11vw, 150px) 0;
+
+    background:
+        linear-gradient(135deg,
+            #171717,
+            #0c0c0c);
+
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.shop-note h2 {
+    max-width: 850px;
+    margin: 12px 0 28px;
+}
+
+.shop-note>.shop-inner>p:not(.eyebrow) {
+    max-width: 620px;
+    margin-bottom: 25px;
+
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+
+/* ========================================
+   TABLET
+   ======================================== */
+
+@media (max-width: 950px) {
+
+    .shop-hero-content h1 {
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .shop-heading {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+    .shop-intro {
+        max-width: 600px;
+    }
+}
+
+
+/* ========================================
+   MOBIEL
+   ======================================== */
+
+@media (max-width: 650px) {
+
+    /*
+       Op mobiel blijft de HELE banner zichtbaar.
+
+       Omdat de banner erg breed is, wordt hij
+       op een telefoon vanzelf relatief laag.
+
+       Daarom staat de hero-tekst hier ONDER
+       de afbeelding in plaats van er overheen.
+    */
+
+    .shop-hero {
+        overflow: visible;
+    }
+
+    .shop-hero-image {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        aspect-ratio: 3.35 / 1;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .shop-hero-content {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+
+        transform: none;
+
+        width: 100%;
+
+        padding: 34px 20px 42px;
+
+        background: #111;
+    }
+
+    .shop-hero-content h1 {
+        max-width: none;
+
+        margin: 0 0 14px;
+
+        font-size: clamp(2.3rem, 12vw, 3.5rem);
+        line-height: .9;
+    }
+
+    .shop-hero-content>p:not(.eyebrow) {
+        display: block;
+
+        margin-bottom: 12px;
+
+        font-size: .95rem;
+
+        text-shadow: none;
+    }
+
+
+    /* Shop */
+
+    .shop-inner {
+        width: min(100% - 40px, 1200px);
+    }
+
+    .shop-products {
+        padding-top: 70px;
+        padding-bottom: 80px;
+    }
+
+    .shop-heading {
+        margin-bottom: 40px;
+    }
+
+
+    /* Producten */
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product-card {
+        border-radius: 15px;
+    }
+
+    .product-info {
+        padding: 21px;
+    }
+}
+
+/* ========================================
+   PRODUCT DETAIL PAGES
+   Geldt voor alle merch-productpagina's
+   ======================================== */
+
+.product-page {
+    background: #0d0d0d;
+}
+
+
+/* ========================================
+   PRODUCT DETAIL — BASIS
+   ======================================== */
+
+.product-detail {
+    padding: 10px 0 clamp(80px, 9vw, 130px);
+
+    background:
+        radial-gradient(circle at 25% 10%,
+            rgba(255, 129, 43, .08),
+            transparent 30%),
+        #111;
+
+}
+
+.product-detail-inner {
+    width: min(1200px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+
+/* Terug naar merch */
+
+.product-back {
+    display: inline-block;
+    margin-bottom: 24px;
+
+    color: var(--muted);
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+.product-back:hover {
+    color: var(--orange);
+    transform: translateX(-3px);
+}
+
+
+/* ========================================
+   TWEE KOLOMMEN
+   Foto links — informatie rechts
+   ======================================== */
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
+    gap: clamp(45px, 7vw, 90px);
+    align-items: start;
+}
+
+
+/* ========================================
+   PRODUCT GALLERY
+   ======================================== */
+
+.product-gallery {
+    min-width: 0;
+}
+
+
+/* Grote productfoto */
+
+.product-main-image {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+
+    padding: 0;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(255, 129, 43, .1),
+            transparent 60%),
+        #181818;
+
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 18px;
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .07);
+
+    cursor: zoom-in;
+}
+
+.product-main-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .35s ease;
+}
+
+.product-main-image:hover img {
+    transform: scale(1.025);
+}
+
+
+/* "Bekijk foto" label */
+
+.product-image-zoom {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+
+    padding: 8px 12px;
+
+    background: rgba(0, 0, 0, .72);
+
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 999px;
+
+    color: #fff;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .68rem;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   THUMBNAILS
+   ======================================== */
+
+.product-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+.product-thumbnail {
+    position: relative;
+
+    aspect-ratio: 4 / 3;
+
+    padding: 0;
+    overflow: hidden;
+
+    background: #181818;
+
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    opacity: .62;
+
+    transition:
+        opacity .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.product-thumbnail img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.product-thumbnail:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.product-thumbnail.is-active {
+    opacity: 1;
+    border-color: var(--orange);
+}
+
+
+/* ========================================
+   PRODUCTINFORMATIE
+   ======================================== */
+
+.product-details {
+    min-width: 0;
+    padding-top: 5px;
+}
+
+.product-details .eyebrow {
+    margin-bottom: 14px;
+}
+
+.product-details h1 {
+    margin: 0 0 18px;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: clamp(2.7rem, 5vw, 5rem);
+    font-weight: 900;
+
+    line-height: .9;
+    letter-spacing: -.055em;
+    text-transform: uppercase;
+}
+
+.product-price {
+    margin: 0 0 28px;
+
+    color: var(--orange);
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.product-description {
+    max-width: 540px;
+    margin-bottom: 34px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+
+/* ========================================
+   PRODUCTOPTIES
+   Bijvoorbeeld maat / kleur / variant
+   ======================================== */
+
+.product-option {
+    margin: 0 0 28px;
+}
+
+.product-option-label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .75rem;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+
+/* Maatknoppen */
+
+.size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.size-option {
+    min-width: 48px;
+    height: 44px;
+
+    padding: 0 12px;
+
+    background: rgba(255, 255, 255, .04);
+
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 5px;
+
+    color: #fff;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .8rem;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
+}
+
+.size-option:hover,
+.size-option.is-active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--black);
+}
+
+
+/* ========================================
+   KOOPKNOP
+   ======================================== */
+
+.product-buy-button {
+    width: 100%;
+    max-width: 420px;
+
+    margin-top: 4px;
+
+    text-align: center;
+}
+
+.product-buy-button:disabled {
+    background: rgba(255, 129, 43, .45);
+    border-color: transparent;
+
+    color: rgba(16, 16, 16, .7);
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ========================================
+   EXTRA PRODUCTINFO
+   ======================================== */
+
+.product-meta {
+    max-width: 540px;
+
+    margin: 35px 0 0;
+    padding: 22px 0 0;
+
+    border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.product-meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+
+    padding: 8px 0;
+
+    color: var(--muted);
+
+    font-size: .9rem;
+}
+
+.product-meta-row strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   SUPPORT / ONDERKANT PRODUCTPAGINA
+   ======================================== */
+
+.product-support {
+    padding: clamp(80px, 10vw, 135px) 0;
+
+    background:
+        linear-gradient(135deg,
+            #191919,
+            #0c0c0c);
+
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.product-support h2 {
+    max-width: 800px;
+    margin: 12px 0 25px;
+}
+
+.product-support p:not(.eyebrow) {
+    max-width: 620px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+}
+
+
+/* ========================================
+   PRODUCT LIGHTBOX
+   ======================================== */
+
+.product-lightbox {
+    position: fixed;
+    z-index: 5000;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 90px;
+
+    background: rgba(0, 0, 0, .94);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.product-lightbox.is-open {
+    display: flex;
+}
+
+
+/* Afbeelding */
+
+.lightbox-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.lightbox-image img {
+    display: block;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .55);
+}
+
+
+/* Sluiten */
+
+.lightbox-close {
+    position: absolute;
+    z-index: 3;
+
+    top: 22px;
+    right: 26px;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 50%;
+
+    color: #fff;
+
+    font-size: 2rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.lightbox-close:hover {
+    background: var(--orange);
+    color: var(--black);
+}
+
+
+/* Vorige / volgende */
+
+.lightbox-navigation {
+    position: absolute;
+    z-index: 3;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    padding: 0;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 50%;
+
+    color: #fff;
+
+    font-size: 2.3rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.lightbox-navigation:hover {
+    background: var(--orange);
+    color: var(--black);
+}
+
+.lightbox-previous {
+    left: 24px;
+}
+
+.lightbox-next {
+    right: 24px;
+}
+
+
+/* Foto 1 / 2 */
+
+.lightbox-counter {
+    position: absolute;
+
+    left: 50%;
+    bottom: 22px;
+
+    transform: translateX(-50%);
+
+    padding: 7px 12px;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 999px;
+
+    color: #fff;
+
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .72rem;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+}
+
+
+/* ========================================
+   PRODUCT DETAIL — TABLET
+   ======================================== */
+
+@media (max-width: 950px) {
+
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .product-gallery {
+        max-width: 760px;
+    }
+
+    .product-details {
+        max-width: 680px;
+    }
+
+    .product-thumbnails {
+        grid-template-columns: repeat(4, minmax(0, 120px));
+    }
+
+}
+
+
+/* ========================================
+   PRODUCT DETAIL — MOBIEL
+   ======================================== */
+
+@media (max-width: 650px) {
+
+    .product-detail {
+        padding-top: 10px;
+        padding-bottom: 75px;
+    }
+
+    .product-detail-inner {
+        width: min(100% - 40px, 1200px);
+    }
+
+    .product-back {
+        margin-bottom: 25px;
+    }
+
+    .product-detail-grid {
+        gap: 38px;
+    }
+
+    .product-main-image {
+        border-radius: 14px;
+    }
+
+    .product-image-zoom {
+        right: 10px;
+        bottom: 10px;
+
+        padding: 6px 9px;
+
+        font-size: .6rem;
+    }
+
+    .product-thumbnails {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+
+        margin-top: 9px;
+    }
+
+    .product-thumbnail {
+        border-radius: 7px;
+    }
+
+    .product-details h1 {
+        font-size: clamp(2.4rem, 12vw, 3.7rem);
+    }
+
+    .product-price {
+        font-size: 1.3rem;
+    }
+
+    .product-description {
+        font-size: 1rem;
+    }
+
+    .product-buy-button {
+        max-width: none;
+    }
+
+    .product-meta-row {
+        gap: 20px;
+    }
+
+    .product-support {
+        padding-top: 75px;
+        padding-bottom: 80px;
+    }
+
+
+    /* Lightbox mobiel */
+
+    .product-lightbox {
+        padding: 70px 16px 65px;
+    }
+
+    .lightbox-close {
+        top: 14px;
+        right: 14px;
+
+        width: 44px;
+        height: 44px;
+    }
+
+    .lightbox-navigation {
+        top: auto;
+        bottom: 12px;
+
+        width: 44px;
+        height: 44px;
+
+        transform: none;
+    }
+
+    .lightbox-previous {
+        left: 14px;
+    }
+
+    .lightbox-next {
+        right: 14px;
+    }
+
+    .lightbox-counter {
+        bottom: 19px;
+    }
+
 }
