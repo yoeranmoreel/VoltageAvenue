@@ -1964,3 +1964,21 @@ footer {
     }
 
 }
+
+/* ========================================
+   PRODUCT LIGHTBOX - EXTRA ZOOM
+   ======================================== */
+
+.lightbox-image img {
+    cursor: zoom-in;
+    transition: transform .25s ease;
+}
+
+.lightbox-image img.is-zoomed {
+    transform: scale(1.8);
+    cursor: zoom-out;
+}
+
+.product-lightbox.is-zoomed .lightbox-image {
+    overflow: auto;
+}ƒ
