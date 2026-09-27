@@ -1,58 +1,482 @@
 <!doctype html>
+
 <html lang="nl">
 
 <head>
+
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="Voltage Avenue merch — shirts, tassen, Homebound, accessoires en meer.">
+    <meta
+        name="description"
+        content="Voltage Avenue merch — shirts, tassen, Homebound, accessoires en meer."
+    >
 
     <title>Merch | Voltage Avenue</title>
 
-    <link rel="icon" type="image/png" href="../assets/images/va+tiger+logo+transparant.png">
+    <link
+        rel="icon"
+        type="image/png"
+        href="../assets/images/va+tiger+logo+transparant.png"
+    >
 
     <link rel="stylesheet" href="../style.css">
+
     <script src="../script.js" defer></script>
+
+    <script type="module">
+
+        import {
+            db
+        } from "../firebase.js";
+
+        import {
+            collection,
+            getDocs,
+            query,
+            where
+        } from
+            "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+
+        const productGrid =
+            document.querySelector(
+                "[data-shop-products]"
+            );
+
+        const shopStatus =
+            document.querySelector(
+                "[data-shop-status]"
+            );
+
+
+        function formatPrice(price) {
+
+            return new Intl.NumberFormat(
+                "nl-NL",
+                {
+                    style: "currency",
+                    currency: "EUR"
+                }
+            ).format(price);
+
+        }
+
+
+        function getImageUrl(path) {
+
+            if (!path) {
+                return "";
+            }
+
+            if (
+                path.startsWith("http://") ||
+                path.startsWith("https://")
+            ) {
+                return path;
+            }
+
+            return `../${path}`;
+        }
+
+
+        function createProductCard(
+            productId,
+            product
+        ) {
+
+            const card =
+                document.createElement("a");
+
+            card.className =
+                "product-card";
+
+            card.href =
+                `product/?id=${encodeURIComponent(productId)}`;
+
+
+            // -----------------------------
+            // PRODUCTAFBEELDING
+            // -----------------------------
+
+            const imageWrapper =
+                document.createElement("div");
+
+            imageWrapper.className =
+                "product-image";
+
+
+            const mainImage =
+                Array.isArray(product.images)
+                    ? product.images[0]
+                    : null;
+
+
+            if (mainImage) {
+
+                const image =
+                    document.createElement("img");
+
+                image.src =
+                    getImageUrl(mainImage);
+
+                image.alt =
+                    product.name || "Voltage Avenue merch";
+
+                image.loading =
+                    "lazy";
+
+
+                image.addEventListener(
+                    "error",
+                    () => {
+
+                        image.hidden = true;
+
+                        placeholder.hidden =
+                            false;
+
+                    }
+                );
+
+
+                imageWrapper.appendChild(
+                    image
+                );
+
+            }
+
+
+            const placeholder =
+                document.createElement("span");
+
+            placeholder.className =
+                "product-placeholder";
+
+            placeholder.textContent =
+                "PRODUCTFOTO VOLGT";
+
+            placeholder.hidden =
+                Boolean(mainImage);
+
+
+            imageWrapper.appendChild(
+                placeholder
+            );
+
+
+            // -----------------------------
+            // PRODUCTINFO
+            // -----------------------------
+
+            const productInfo =
+                document.createElement("div");
+
+            productInfo.className =
+                "product-info";
+
+
+            const textWrapper =
+                document.createElement("div");
+
+
+            const category =
+                document.createElement("p");
+
+            category.className =
+                "product-type";
+
+            category.textContent =
+                product.category || "Merch";
+
+
+            const name =
+                document.createElement("h3");
+
+            name.textContent =
+                product.name || "Voltage Avenue merch";
+
+
+            const price =
+                document.createElement("p");
+
+            price.className =
+                "shop-product-price";
+
+            price.textContent =
+                Number.isFinite(
+                    Number(product.price)
+                )
+                    ? formatPrice(
+                        Number(product.price)
+                    )
+                    : "";
+
+
+            textWrapper.append(
+                category,
+                name,
+                price
+            );
+
+
+            const arrow =
+                document.createElement("span");
+
+            arrow.className =
+                "product-arrow";
+
+            arrow.textContent =
+                "↗";
+
+
+            productInfo.append(
+                textWrapper,
+                arrow
+            );
+
+
+            card.append(
+                imageWrapper,
+                productInfo
+            );
+
+
+            return card;
+
+        }
+
+
+        async function loadShopProducts() {
+
+            if (!productGrid) {
+                return;
+            }
+
+
+            try {
+
+                const productsQuery =
+                    query(
+                        collection(
+                            db,
+                            "products"
+                        ),
+                        where(
+                            "visible",
+                            "==",
+                            true
+                        )
+                    );
+
+
+                const snapshot =
+                    await getDocs(
+                        productsQuery
+                    );
+
+
+                const products =
+                    snapshot.docs.map(
+                        (document) => ({
+                            id: document.id,
+                            ...document.data()
+                        })
+                    );
+
+
+                products.sort(
+                    (a, b) => {
+
+                        const orderA =
+                            Number.isFinite(
+                                Number(a.sortOrder)
+                            )
+                                ? Number(a.sortOrder)
+                                : 9999;
+
+                        const orderB =
+                            Number.isFinite(
+                                Number(b.sortOrder)
+                            )
+                                ? Number(b.sortOrder)
+                                : 9999;
+
+
+                        if (orderA !== orderB) {
+                            return orderA - orderB;
+                        }
+
+
+                        return String(
+                            a.name || ""
+                        ).localeCompare(
+                            String(
+                                b.name || ""
+                            ),
+                            "nl"
+                        );
+
+                    }
+                );
+
+
+                productGrid.innerHTML =
+                    "";
+
+
+                if (products.length === 0) {
+
+                    if (shopStatus) {
+
+                        shopStatus.textContent =
+                            "Er staat momenteel geen merch online.";
+
+                        shopStatus.hidden =
+                            false;
+
+                    }
+
+                    return;
+
+                }
+
+
+                products.forEach(
+                    (product) => {
+
+                        productGrid.appendChild(
+                            createProductCard(
+                                product.id,
+                                product
+                            )
+                        );
+
+                    }
+                );
+
+
+                if (shopStatus) {
+                    shopStatus.hidden = true;
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Merch laden mislukt:",
+                    error
+                );
+
+
+                if (shopStatus) {
+
+                    shopStatus.textContent =
+                        "De merch kon niet worden geladen. Probeer het later opnieuw.";
+
+                    shopStatus.hidden =
+                        false;
+
+                }
+
+            }
+
+        }
+
+
+        loadShopProducts();
+
+    </script>
+
 </head>
 
+
 <body class="shop-page">
+
 
     <!-- HEADER -->
 
     <header class="header" id="top">
 
-        <a class="brand" href="../" aria-label="Voltage Avenue — homepage">
-            <img src="../assets/images/va+tiger+logo+transparant.png" alt="Voltage Avenue tijgerlogo">
+        <a
+            class="brand"
+            href="../"
+            aria-label="Voltage Avenue — homepage"
+        >
+            <img
+                src="../assets/images/va+tiger+logo+transparant.png"
+                alt="Voltage Avenue tijgerlogo"
+            >
         </a>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">
+
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="navigation"
+        >
             ☰
             <span class="sr-only">Menu</span>
         </button>
 
-        <nav id="navigation" class="navigation" aria-label="Hoofdnavigatie">
 
-            <a href="../#bio">Biografie</a>
-            <a href="../#luisteren">Luisteren</a>
-            <a href="../#galerij">Galerij</a>
-            <a href="../#live">Live</a>
-            <a href="." aria-current="page">Merch</a>
-            <a href="../#contact">Contact</a>
+        <nav
+            id="navigation"
+            class="navigation"
+            aria-label="Hoofdnavigatie"
+        >
+
+            <a href="../#bio">
+                Biografie
+            </a>
+
+            <a href="../#luisteren">
+                Luisteren
+            </a>
+
+            <a href="../#galerij">
+                Galerij
+            </a>
+
+            <a href="../#live">
+                Live
+            </a>
+
+            <a
+                href="."
+                aria-current="page"
+            >
+                Merch
+            </a>
+
+            <a href="../#contact">
+                Contact
+            </a>
 
         </nav>
 
     </header>
 
 
+
     <main>
+
 
         <!-- SHOP HERO -->
 
         <section class="shop-hero">
 
-            <img class="shop-hero-image" src="../assets/images/shop/hero-shop.jpg" alt="Voltage Avenue merchstand">
+            <img
+                class="shop-hero-image"
+                src="../assets/images/shop/hero-shop.jpg"
+                alt="Voltage Avenue merchstand"
+            >
 
             <div class="shop-hero-overlay"></div>
+
 
             <div class="shop-hero-content">
 
@@ -66,24 +490,32 @@
                     Voltage Avenue merchkoffer.
                 </p>
 
-
-
             </div>
 
         </section>
 
 
+
         <!-- PRODUCTEN -->
 
-        <section class="shop-products" id="producten">
+        <section
+            class="shop-products"
+            id="producten"
+        >
 
             <div class="shop-inner">
+
 
                 <div class="shop-heading">
 
                     <div>
-                        <p class="eyebrow">Official merch</p>
+
+                        <p class="eyebrow">
+                            Official merch
+                        </p>
+
                     </div>
+
 
                     <p class="shop-intro">
                         Rechtstreeks van onze merchtafel naar jouw deur.
@@ -92,244 +524,24 @@
                 </div>
 
 
-                <div class="product-grid">
+                <p
+                    class="shop-intro"
+                    data-shop-status
+                >
+                    Merch laden...
+                </p>
+
+
+                <div
+                    class="product-grid"
+                    data-shop-products
+                ></div>
 
-
-                    <!-- T-SHIRT -->
-
-                    <a class="product-card" href="tshirt/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/01_tshirt_wit_closeup.png" alt="Voltage Avenue T-shirt" loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Kleding</p>
-                                <h3>Voltage Avenue T-shirt</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- ORANJE TAS -->
-
-                    <a class="product-card" href="tas-oranje/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/03_tas_oranje_closeup.png" alt="Voltage Avenue oranje totebag"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Accessoires</p>
-                                <h3>Oranje totebag</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- ZWARTE TAS -->
-
-                    <a class="product-card" href="tas-zwart/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/05_tas_zwart_closeup.png" alt="Voltage Avenue zwarte totebag"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Accessoires</p>
-                                <h3>Zwarte totebag</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- HOMEBOUND -->
-
-                    <a class="product-card" href="homebound/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/07_homebound_voorkant.png" alt="Voltage Avenue Homebound EP"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Muziek</p>
-                                <h3>Homebound EP</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- ARMBANDJES -->
-
-                    <a class="product-card" href="armbandjes/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/11_armbandjes_closeup.png" alt="Voltage Avenue armbandjes"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Accessoires</p>
-                                <h3>Armbandjes</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- PLECTRUM -->
-
-                    <a class="product-card" href="plectrum/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/13_plectrums_closeup.png" alt="Voltage Avenue plectrum"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Accessoires</p>
-                                <h3>Plectrum</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- STICKERS -->
-
-                    <a class="product-card" href="stickers/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/15_stickers_closeup.png" alt="Voltage Avenue stickers"
-                                loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Stickers</p>
-                                <h3>Voltage Avenue stickers</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- MOK -->
-
-                    <a class="product-card" href="mok/">
-
-                        <div class="product-image">
-
-                            <img src="../assets/images/shop/17_mok_closeup.png" alt="Voltage Avenue Bruce mok" loading="lazy">
-
-                            <span class="product-placeholder">
-                                PRODUCTFOTO VOLGT
-                            </span>
-
-                        </div>
-
-                        <div class="product-info">
-
-                            <div>
-                                <p class="product-type">Merch</p>
-                                <h3>Bruce mok</h3>
-                            </div>
-
-                            <span class="product-arrow">↗</span>
-
-                        </div>
-
-                    </a>
-
-
-                </div>
 
             </div>
 
         </section>
+
 
 
         <!-- SHOP INFO -->
@@ -338,9 +550,14 @@
 
             <div class="shop-inner">
 
-                <p class="eyebrow">From the merch table</p>
+                <p class="eyebrow">
+                    From the merch table
+                </p>
 
-                <h2>THANKS FOR<br>THE SUPPORT.</h2>
+                <h2>
+                    THANKS FOR<br>
+                    THE SUPPORT.
+                </h2>
 
                 <p>
                     Door merch rechtstreeks bij ons te kopen,
@@ -348,7 +565,10 @@
                     muziek te maken en shows te spelen.
                 </p>
 
-                <a class="button button-outline" href="../">
+                <a
+                    class="button button-outline"
+                    href="../"
+                >
                     ← Terug naar Voltage Avenue
                 </a>
 
@@ -356,7 +576,9 @@
 
         </section>
 
+
     </main>
+
 
 
     <footer>
@@ -365,9 +587,12 @@
             © <span id="year">2026</span> Voltage Avenue
         </span>
 
-        <a href="#top">Terug naar boven ↑</a>
+        <a href="#top">
+            Terug naar boven ↑
+        </a>
 
     </footer>
+
 
 </body>
 

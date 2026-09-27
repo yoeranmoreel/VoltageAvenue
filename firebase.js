@@ -12,6 +12,11 @@ import {
 } from
     "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+import {
+    getAuth
+} from
+    "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
 
 // ========================================
 // FIREBASE CONFIG
@@ -33,6 +38,21 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+
+// ========================================
+// GEDEELDE FIREBASE SERVICES
+//
+// De webshop gebruikt db.
+// De admin gebruikt db + auth.
+// ========================================
+
+export {
+    app,
+    db,
+    auth
+};
 
 
 // ========================================
@@ -184,6 +204,210 @@ async function loadProduct() {
         ) {
             priceElement.textContent =
                 formatPrice(product.price);
+        }
+
+
+        // ========================================
+        // VARIANTEN / OPTIES
+        // ========================================
+
+        const optionsSection =
+            document.querySelector(
+                "[data-product-options]"
+            );
+
+        const optionTitle =
+            document.querySelector(
+                "[data-product-option-title]"
+            );
+
+        const optionButtons =
+            document.querySelector(
+                "[data-product-option-buttons]"
+            );
+
+        const hasVariants =
+            Boolean(product.hasVariants) ||
+            (
+                product.stock &&
+                typeof product.stock === "object" &&
+                !Array.isArray(product.stock)
+            );
+
+
+        if (
+            optionsSection &&
+            optionButtons
+        ) {
+
+            optionButtons.innerHTML = "";
+
+            if (hasVariants) {
+
+                const variants =
+                    Object.entries(
+                        product.stock || {}
+                    );
+
+                if (optionTitle) {
+
+                    const label =
+                        product.variantLabel ||
+                        "Variant";
+
+                    optionTitle.textContent =
+                        `Kies je ${label.toLowerCase()}`;
+
+                }
+
+                variants.forEach(
+                    ([variant, amount]) => {
+
+                        const button =
+                            document.createElement(
+                                "button"
+                            );
+
+                        button.className =
+                            "size-option";
+
+                        button.type =
+                            "button";
+
+                        button.textContent =
+                            variant;
+
+                        button.disabled =
+                            Number(amount) <= 0;
+
+                        button.setAttribute(
+                            "aria-label",
+                            `${variant}: ${Number(amount) || 0} op voorraad`
+                        );
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                optionButtons
+                                    .querySelectorAll(
+                                        ".size-option"
+                                    )
+                                    .forEach(
+                                        (item) =>
+                                            item.classList.remove(
+                                                "is-selected"
+                                            )
+                                    );
+
+                                button.classList.add(
+                                    "is-selected"
+                                );
+
+                            }
+                        );
+
+                        optionButtons.appendChild(
+                            button
+                        );
+
+                    }
+                );
+
+                optionsSection.hidden =
+                    false;
+
+            }
+
+            else {
+
+                optionsSection.hidden =
+                    true;
+
+            }
+
+        }
+
+
+        // ========================================
+        // PRODUCTMETA
+        // ========================================
+
+        const metaElement =
+            document.querySelector(
+                "[data-product-meta]"
+            );
+
+        if (metaElement) {
+
+            metaElement.innerHTML = "";
+
+            const metaItems = [
+                [
+                    "Categorie",
+                    product.category || "Merch"
+                ]
+            ];
+
+
+            if (hasVariants) {
+
+                metaItems.push([
+                    product.variantLabel ||
+                    "Varianten",
+                    Object.keys(
+                        product.stock || {}
+                    ).join(" · ")
+                ]);
+
+            }
+
+            else {
+
+                metaItems.push([
+                    "Voorraad",
+                    `${Number(product.stock) || 0}`
+                ]);
+
+            }
+
+
+            metaItems.forEach(
+                ([label, value]) => {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+                    const labelElement =
+                        document.createElement(
+                            "span"
+                        );
+
+                    labelElement.textContent =
+                        label;
+
+                    const valueElement =
+                        document.createElement(
+                            "strong"
+                        );
+
+                    valueElement.textContent =
+                        value;
+
+                    row.append(
+                        labelElement,
+                        valueElement
+                    );
+
+                    metaElement.appendChild(
+                        row
+                    );
+
+                }
+            );
+
         }
 
 
@@ -365,6 +589,26 @@ async function loadProduct() {
 
 
         // ========================================
+        // META DESCRIPTION
+        // ========================================
+
+        const metaDescription =
+            document.querySelector(
+                'meta[name="description"]'
+            );
+
+        if (
+            metaDescription &&
+            product.description
+        ) {
+            metaDescription.setAttribute(
+                "content",
+                product.description
+            );
+        }
+
+
+        // ========================================
         // PAGINATITEL
         // ========================================
 
@@ -391,6 +635,16 @@ async function loadProduct() {
 
 // ========================================
 // PRODUCT LADEN
+//
+// firebase.js wordt ook door de admin gebruikt.
+// Daarom starten we productlogica alleen wanneer
+// we daadwerkelijk op een productpagina zitten.
 // ========================================
 
-loadProduct();
+if (
+    document.querySelector(
+        "[data-product-name]"
+    )
+) {
+    loadProduct();
+}

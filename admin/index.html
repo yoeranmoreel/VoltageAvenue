@@ -12,13 +12,92 @@
 
     <link rel="icon" type="image/png" href="../assets/images/va+tiger+logo+transparant.png">
 
-    <link rel="stylesheet" href="./admin.css?v=20260927-1">
+    <link rel="stylesheet" href="./admin.css?v=20260927-3">
 
     <script type="module" src="admin.js"></script>
 </head>
 
 
 <body>
+
+    <!-- ========================================
+    LOGIN
+    ========================================= -->
+
+    <main class="admin-login" data-auth-login>
+
+        <section class="admin-login-card">
+
+            <img
+                class="admin-login-logo"
+                src="../assets/images/va+tiger+logo+transparant.png"
+                alt="Voltage Avenue"
+            >
+
+            <p class="admin-eyebrow">
+                Voltage Avenue
+            </p>
+
+            <h1>
+                Merch Admin
+            </h1>
+
+            <p class="admin-login-intro">
+                Log in om producten, voorraad en later bestellingen te beheren.
+            </p>
+
+            <form class="admin-login-form" data-login-form>
+
+                <label class="admin-field">
+                    <span>E-mailadres</span>
+
+                    <input
+                        type="email"
+                        name="email"
+                        autocomplete="username"
+                        required
+                    >
+                </label>
+
+                <label class="admin-field">
+                    <span>Wachtwoord</span>
+
+                    <input
+                        type="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </label>
+
+                <p
+                    class="admin-login-error"
+                    data-login-error
+                    role="alert"
+                    hidden
+                ></p>
+
+                <button
+                    class="admin-button admin-button-primary admin-login-button"
+                    type="submit"
+                    data-login-button
+                >
+                    Inloggen
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ========================================
+    ADMIN APP
+    ========================================= -->
+
+    <div data-auth-admin hidden>
 
     <!-- ========================================
     ADMIN HEADER
@@ -38,6 +117,8 @@
             </div>
         </a>
 
+        <button class="admin-hamburger" type="button" data-mobile-menu-toggle aria-label="Menu openen" aria-expanded="false"><span></span><span></span><span></span></button>
+
         <div class="admin-header-actions">
 
             <a
@@ -48,6 +129,15 @@
             >
                 Bekijk webshop ↗
             </a>
+
+            <button
+                class="admin-logout-button"
+                type="button"
+                data-logout
+                title="Uitloggen"
+            >
+                Uitloggen
+            </button>
 
         </div>
 
@@ -69,8 +159,14 @@
 
             <nav class="admin-navigation">
 
+                <button class="admin-nav-item is-active" type="button" data-admin-page="dashboard">
+                    <span class="admin-nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </button>
+
+
                 <button
-                    class="admin-nav-item is-active"
+                    class="admin-nav-item"
                     type="button"
                     data-admin-page="products"
                 >
@@ -98,17 +194,18 @@
                 <button
                     class="admin-nav-item"
                     type="button"
-                    data-admin-page="orders"
+                    data-admin-page="sales"
                 >
-                    <span class="admin-nav-icon">□</span>
+                    <span class="admin-nav-icon">€</span>
 
                     <span>
-                        Bestellingen
+                        Verkopen
                     </span>
+                </button>
 
-                    <span class="admin-nav-badge">
-                        Later
-                    </span>
+                <button class="admin-nav-item" type="button" data-admin-page="orders">
+                    <span class="admin-nav-icon">□</span>
+                    <span>Bestellingen</span>
                 </button>
 
 
@@ -121,10 +218,6 @@
 
                     <span>
                         Show mode
-                    </span>
-
-                    <span class="admin-nav-badge">
-                        Later
                     </span>
                 </button>
 
@@ -157,8 +250,52 @@
             PRODUCTOVERZICHT
             ================================== -->
 
+            <section class="admin-page admin-dashboard-page is-active" data-admin-content="dashboard">
+                <div class="admin-dashboard-shell">
+                    <div class="admin-dashboard-intro">
+                        <p class="admin-eyebrow">Voltage Avenue</p>
+                        <h1>Merch Admin</h1>
+                    </div>
+
+                    <div class="admin-dashboard-grid">
+                        <button class="admin-dashboard-tile" type="button" data-dashboard-go="products">
+                            <span class="admin-dashboard-icon">▦</span><strong>Producten</strong><small>Voorraad & beheer</small>
+                        </button>
+                        <button class="admin-dashboard-tile" type="button" data-dashboard-go="new-product">
+                            <span class="admin-dashboard-icon">＋</span><strong>Product toevoegen</strong><small>Nieuwe merch</small>
+                        </button>
+                        <button class="admin-dashboard-tile" type="button" data-dashboard-go="sales">
+                            <span class="admin-dashboard-icon">€</span><strong>Verkopen</strong><small>Transacties & rapporten</small>
+                        </button>
+                        <button class="admin-dashboard-tile" type="button" data-dashboard-go="orders">
+                            <span class="admin-dashboard-icon">□</span><strong>Bestellingen</strong><small>Webshop & afhalen</small>
+                        </button>
+                        <button class="admin-dashboard-tile admin-dashboard-tile-show" type="button" data-dashboard-go="show-mode">
+                            <span class="admin-dashboard-icon">⚡</span>
+                            <span><strong>Show modus</strong><small>Open de merchkassa</small></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="admin-page" data-admin-content="orders">
+                <div class="admin-page-header">
+                    <div>
+                        <p class="admin-eyebrow">Webshop</p>
+                        <h1>Bestellingen</h1>
+                        <p>Webshopbestellingen, verzendingen en afhalen bij shows komen hier samen.</p>
+                    </div>
+                </div>
+                <section class="admin-panel admin-orders-empty">
+                    <div class="admin-empty-icon">□</div>
+                    <h2>Nog geen bestellingen</h2>
+                    <p>Zodra de webshop-checkout is aangesloten verschijnen bestellingen hier automatisch.</p>
+                    <p class="admin-muted">Ook “ophalen bij show” krijgt hier straks de klant, bestelling en gekozen show.</p>
+                </section>
+            </section>
+
             <section
-                class="admin-page is-active"
+                class="admin-page"
                 data-admin-content="products"
             >
 
@@ -275,11 +412,11 @@
                             Merch
                         </p>
 
-                        <h1>
+                        <h1 data-product-form-title>
                             Product toevoegen
                         </h1>
 
-                        <p>
+                        <p data-product-form-intro>
                             Maak een nieuw product voor de webshop.
                         </p>
 
@@ -616,7 +753,7 @@
 
 
                     <!-- =========================
-                    PUBLICATIE
+                    OPBRENGSTVERDELING
                     ========================== -->
 
                     <section class="admin-panel">
@@ -627,6 +764,92 @@
 
                                 <span class="admin-step">
                                     04
+                                </span>
+
+                                <h2>
+                                    Opbrengstverdeling
+                                </h2>
+
+                            </div>
+
+                            <p>
+                                Leg vast welk percentage van iedere verkoop
+                                voor Merch Girl en voor de band is.
+                            </p>
+
+                        </div>
+
+                        <div class="admin-split-grid">
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Merch Girl
+                                </span>
+
+                                <div class="admin-percent-input">
+
+                                    <input
+                                        type="number"
+                                        name="merchGirlSplit"
+                                        min="0"
+                                        max="100"
+                                        step="1"
+                                        placeholder="20"
+                                        data-split-merch
+                                    >
+
+                                    <span>%</span>
+
+                                </div>
+
+                            </label>
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Band
+                                </span>
+
+                                <div class="admin-percent-input">
+
+                                    <input
+                                        type="number"
+                                        name="bandSplit"
+                                        min="0"
+                                        max="100"
+                                        step="1"
+                                        placeholder="80"
+                                        data-split-band
+                                    >
+
+                                    <span>%</span>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                        <p class="admin-split-help" data-split-help>
+                            Vul één percentage in; het andere wordt automatisch aangevuld tot 100%.
+                        </p>
+
+                    </section>
+
+
+                    <!-- =========================
+                    PUBLICATIE
+                    ========================== -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-heading">
+
+                            <div>
+
+                                <span class="admin-step">
+                                    05
                                 </span>
 
                                 <h2>
@@ -685,6 +908,15 @@
                         </button>
 
                         <button
+                            class="admin-button admin-button-danger"
+                            type="button"
+                            data-delete-product
+                            hidden
+                        >
+                            Product volledig verwijderen
+                        </button>
+
+                        <button
                             class="admin-button admin-button-primary"
                             type="submit"
                         >
@@ -703,8 +935,8 @@
             ================================== -->
 
             <section
-                class="admin-page"
-                data-admin-content="orders"
+                class="admin-page admin-sales-page"
+                data-admin-content="sales"
             >
 
                 <div class="admin-page-header">
@@ -712,26 +944,125 @@
                     <div>
 
                         <p class="admin-eyebrow">
-                            Binnenkort
+                            Administratie
                         </p>
 
                         <h1>
-                            Bestellingen
+                            Verkopen
                         </h1>
 
                         <p>
-                            Hier komt later het overzicht van online bestellingen.
+                            Bekijk een sessie of periode en zie direct de verdeling
+                            tussen Merch Girl en de band.
                         </p>
+
+                    </div>
+
+                    <div class="admin-sales-actions">
+
+                        <button
+                            class="admin-button admin-button-secondary"
+                            type="button"
+                            data-export-sales
+                        >
+                            CSV exporteren
+                        </button>
+
+                        <button
+                            class="admin-button admin-button-secondary"
+                            type="button"
+                            data-download-sales-pdf
+                        >
+                            PDF downloaden
+                        </button>
 
                     </div>
 
                 </div>
 
+                <section class="admin-panel admin-sales-filter">
+
+                    <div class="admin-sales-filter-grid">
+
+                        <label class="admin-field">
+                            <span>Van</span>
+                            <input type="date" data-sales-from>
+                        </label>
+
+                        <label class="admin-field">
+                            <span>Tot en met</span>
+                            <input type="date" data-sales-to>
+                        </label>
+
+                        <label class="admin-field">
+                            <span>Bron</span>
+                            <select data-sales-source>
+                                <option value="all">Alle verkopen</option>
+                                <option value="show-mode">Show mode</option>
+                                <option value="webshop">Webshop</option>
+                            </select>
+                        </label>
+
+                        <div class="admin-sales-presets">
+                            <button
+                                class="admin-button admin-button-secondary"
+                                type="button"
+                                data-sales-today
+                            >
+                                Vandaag
+                            </button>
+
+                            <button
+                                class="admin-button admin-button-secondary"
+                                type="button"
+                                data-sales-all
+                            >
+                                Alles
+                            </button>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <div class="admin-sales-summary">
+
+                    <article><span>Omzet</span><strong data-sales-revenue>€ 0,00</strong></article>
+                    <article><span>Pin</span><strong data-sales-card>€ 0,00</strong></article>
+                    <article><span>Contant</span><strong data-sales-cash>€ 0,00</strong></article>
+                    <article><span>Merch Girl</span><strong data-sales-merch>€ 0,00</strong></article>
+                    <article><span>Band</span><strong data-sales-band>€ 0,00</strong></article>
+                    <article><span>Items</span><strong data-sales-items>0</strong></article>
+                    <article><span>Transacties</span><strong data-sales-transactions>0</strong></article>
+
+                </div>
+
+                <section class="admin-panel">
+
+                    <div class="admin-panel-heading">
+
+                        <div>
+                            <h2>Verkoopregels</h2>
+                        </div>
+
+                        <p data-sales-result-label>
+                            Verkopen laden...
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="admin-sales-list"
+                        data-sales-list
+                    ></div>
+
+                </section>
+
             </section>
 
 
             <section
-                class="admin-page"
+                class="admin-page admin-show-mode"
                 data-admin-content="show-mode"
             >
 
@@ -748,11 +1079,103 @@
                         </h1>
 
                         <p>
-                            Snelle verkoopregistratie voor achter de merchtafel.
+                            Tik op een product, kies eventueel een variant en registreer direct een verkoop.
+                            De voorraad wordt meteen bijgewerkt.
                         </p>
 
                     </div>
 
+                    <div class="show-mode-total">
+                        <span>Deze sessie</span>
+                        <strong data-show-session-total>€ 0,00</strong>
+                        <small data-show-session-count>0 verkopen</small>
+                    </div>
+
+                </div>
+
+                <div
+                    class="show-mode-message"
+                    data-show-message
+                    hidden
+                ></div>
+
+                <div
+                    class="show-product-grid"
+                    data-show-products
+                >
+                    <p class="admin-muted">
+                        Producten laden...
+                    </p>
+                </div>
+
+                <section class="show-recent-sales">
+
+                    <div class="show-recent-heading">
+                        <div>
+                            <p class="admin-eyebrow">Zojuist verkocht</p>
+                            <h2>Recente verkopen</h2>
+                        </div>
+
+                        <button
+                            class="admin-button admin-button-secondary"
+                            type="button"
+                            data-clear-show-session
+                        >
+                            Sessie wissen
+                        </button>
+                    </div>
+
+                    <div
+                        class="show-sales-list"
+                        data-show-sales
+                    >
+                        <p class="admin-muted">
+                            Nog niets verkocht in deze sessie.
+                        </p>
+                    </div>
+
+                </section>
+
+                <div
+                    class="show-variant-sheet"
+                    data-show-variant-sheet
+                    hidden
+                >
+                    <button
+                        class="show-variant-backdrop"
+                        type="button"
+                        data-close-show-variants
+                        aria-label="Sluiten"
+                    ></button>
+
+                    <div class="show-variant-panel">
+
+                        <div class="show-variant-header">
+                            <div>
+                                <p class="admin-eyebrow" data-show-variant-label>
+                                    Variant
+                                </p>
+                                <h2 data-show-variant-product>
+                                    Product
+                                </h2>
+                            </div>
+
+                            <button
+                                class="admin-icon-button"
+                                type="button"
+                                data-close-show-variants
+                                aria-label="Sluiten"
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        <div
+                            class="show-variant-grid"
+                            data-show-variant-options
+                        ></div>
+
+                    </div>
                 </div>
 
             </section>
@@ -761,6 +1184,65 @@
 
     </div>
 
-</body>
+    </div>
+
+
+        <div class="admin-modal" data-sale-editor hidden>
+            <div class="admin-modal-backdrop" data-close-sale-editor></div>
+
+            <section class="admin-modal-panel admin-sale-editor-panel">
+                <button class="admin-modal-close" type="button" data-close-sale-editor aria-label="Sluiten">×</button>
+
+                <p class="admin-eyebrow">Transactie</p>
+                <h2 data-sale-editor-title>Verkoop bewerken</h2>
+                <p class="admin-muted" data-sale-editor-meta></p>
+
+                <div class="admin-sale-editor-lines" data-sale-editor-lines></div>
+
+                <div class="admin-payment-block">
+                    <span>Betaalwijze</span>
+                    <div class="admin-payment-options">
+                        <button type="button" data-edit-payment="pin">Pin</button>
+                        <button type="button" data-edit-payment="cash">Contant</button>
+                    </div>
+                </div>
+
+                <div class="admin-sale-editor-total">
+                    <span data-sale-editor-count>0 items</span>
+                    <strong data-sale-editor-total>€ 0,00</strong>
+                </div>
+
+                <div class="admin-sale-editor-actions">
+                    <button class="admin-button admin-button-danger" type="button" data-cancel-sale>
+                        Verkoop annuleren
+                    </button>
+                    <button class="admin-button admin-button-primary" type="button" data-save-sale>
+                        Wijzigingen opslaan
+                    </button>
+                </div>
+
+                <p class="admin-muted admin-sale-editor-note">
+                    Annuleren herstelt de voorraad. De transactie blijft als geannuleerd in de historie staan.
+                </p>
+            </section>
+        </div>
+
+<div class="admin-mobile-menu" data-mobile-menu hidden>
+        <button class="admin-mobile-menu-backdrop" type="button" data-mobile-menu-close aria-label="Menu sluiten"></button>
+        <aside class="admin-mobile-menu-panel">
+            <div class="admin-mobile-menu-head"><div><span>VOLTAGE AVENUE</span><strong>MERCH ADMIN</strong></div><button type="button" data-mobile-menu-close aria-label="Menu sluiten">×</button></div>
+            <nav class="admin-mobile-menu-links">
+                <button type="button" data-mobile-go="dashboard">Dashboard</button>
+                <button type="button" data-mobile-go="products">Producten</button>
+                <button type="button" data-mobile-go="new-product">Product toevoegen</button>
+                <button type="button" data-mobile-go="sales">Verkopen</button>
+                <button type="button" data-mobile-go="orders">Bestellingen</button>
+                <button class="is-show" type="button" data-mobile-go="show-mode">⚡ Show modus</button>
+            </nav>
+            <button class="admin-mobile-logout" type="button" data-mobile-logout>Uitloggen</button>
+        </aside>
+    </div>
+
+    </body>
 
 </html>
