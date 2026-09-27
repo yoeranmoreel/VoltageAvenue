@@ -1,0 +1,766 @@
+<!doctype html>
+
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Merch Admin | Voltage Avenue</title>
+
+    <link rel="icon" type="image/png" href="../assets/images/va+tiger+logo+transparant.png">
+
+    <link rel="stylesheet" href="admin.css">
+
+    <script type="module" src="admin.js"></script>
+</head>
+
+
+<body>
+
+    <!-- ========================================
+    ADMIN HEADER
+    ========================================= -->
+
+    <header class="admin-header">
+
+        <a class="admin-brand" href="../">
+            <img
+                src="../assets/images/va+tiger+logo+transparant.png"
+                alt="Voltage Avenue"
+            >
+
+            <div>
+                <strong>Voltage Avenue</strong>
+                <span>Merch Admin</span>
+            </div>
+        </a>
+
+        <div class="admin-header-actions">
+
+            <a
+                class="admin-shop-link"
+                href="../shop/"
+                target="_blank"
+                rel="noopener"
+            >
+                Bekijk webshop ↗
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+    ADMIN LAYOUT
+    ========================================= -->
+
+    <div class="admin-layout">
+
+
+        <!-- ====================================
+        ZIJBALK
+        ===================================== -->
+
+        <aside class="admin-sidebar">
+
+            <nav class="admin-navigation">
+
+                <button
+                    class="admin-nav-item is-active"
+                    type="button"
+                    data-admin-page="products"
+                >
+                    <span class="admin-nav-icon">▦</span>
+
+                    <span>
+                        Producten
+                    </span>
+                </button>
+
+
+                <button
+                    class="admin-nav-item"
+                    type="button"
+                    data-admin-page="new-product"
+                >
+                    <span class="admin-nav-icon">＋</span>
+
+                    <span>
+                        Product toevoegen
+                    </span>
+                </button>
+
+
+                <button
+                    class="admin-nav-item"
+                    type="button"
+                    data-admin-page="orders"
+                >
+                    <span class="admin-nav-icon">□</span>
+
+                    <span>
+                        Bestellingen
+                    </span>
+
+                    <span class="admin-nav-badge">
+                        Later
+                    </span>
+                </button>
+
+
+                <button
+                    class="admin-nav-item"
+                    type="button"
+                    data-admin-page="show-mode"
+                >
+                    <span class="admin-nav-icon">⚡</span>
+
+                    <span>
+                        Show mode
+                    </span>
+
+                    <span class="admin-nav-badge">
+                        Later
+                    </span>
+                </button>
+
+            </nav>
+
+
+            <div class="admin-sidebar-footer">
+
+                <span>
+                    Voltage Avenue Merch
+                </span>
+
+                <small>
+                    Firebase + GitHub
+                </small>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ====================================
+        HOOFDINHOUD
+        ===================================== -->
+
+        <main class="admin-main">
+
+
+            <!-- =================================
+            PRODUCTOVERZICHT
+            ================================== -->
+
+            <section
+                class="admin-page is-active"
+                data-admin-content="products"
+            >
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <p class="admin-eyebrow">
+                            Merch
+                        </p>
+
+                        <h1>
+                            Producten
+                        </h1>
+
+                        <p>
+                            Beheer de producten die in de Voltage Avenue
+                            webshop staan.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="admin-button admin-button-primary"
+                        type="button"
+                        data-open-new-product
+                    >
+                        + Product toevoegen
+                    </button>
+
+                </div>
+
+
+                <!-- Producten komen hier later uit Firestore -->
+
+                <div class="admin-product-list">
+
+                    <article class="admin-product-card">
+
+                        <div class="admin-product-image">
+
+                            <img
+                                src="../assets/images/shop/01_tshirt_wit_closeup.png"
+                                alt=""
+                            >
+
+                        </div>
+
+
+                        <div class="admin-product-info">
+
+                            <span class="admin-status is-visible">
+                                Zichtbaar
+                            </span>
+
+                            <h2>
+                                Voltage Avenue T-shirt
+                            </h2>
+
+                            <p>
+                                Kleding
+                            </p>
+
+                        </div>
+
+
+                        <div class="admin-product-price">
+                            € 15,00
+                        </div>
+
+
+                        <div class="admin-product-stock">
+
+                            <span>
+                                Voorraad
+                            </span>
+
+                            <strong>
+                                5
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            class="admin-button admin-button-secondary"
+                            type="button"
+                        >
+                            Bewerken
+                        </button>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+            PRODUCT TOEVOEGEN
+            ================================== -->
+
+            <section
+                class="admin-page"
+                data-admin-content="new-product"
+            >
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <p class="admin-eyebrow">
+                            Merch
+                        </p>
+
+                        <h1>
+                            Product toevoegen
+                        </h1>
+
+                        <p>
+                            Maak een nieuw product voor de webshop.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    class="admin-form"
+                    data-product-form
+                >
+
+
+                    <!-- =========================
+                    BASISGEGEVENS
+                    ========================== -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-heading">
+
+                            <div>
+
+                                <span class="admin-step">
+                                    01
+                                </span>
+
+                                <h2>
+                                    Productgegevens
+                                </h2>
+
+                            </div>
+
+                            <p>
+                                De informatie die bezoekers in de webshop zien.
+                            </p>
+
+                        </div>
+
+
+                        <div class="admin-form-grid">
+
+
+                            <label class="admin-field admin-field-wide">
+
+                                <span>
+                                    Productnaam
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Bijvoorbeeld: Voltage Avenue T-shirt"
+                                >
+
+                            </label>
+
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Categorie
+                                </span>
+
+                                <select name="category">
+
+                                    <option value="">
+                                        Kies categorie
+                                    </option>
+
+                                    <option value="Kleding">
+                                        Kleding
+                                    </option>
+
+                                    <option value="Muziek">
+                                        Muziek
+                                    </option>
+
+                                    <option value="Accessoires">
+                                        Accessoires
+                                    </option>
+
+                                    <option value="Stickers">
+                                        Stickers
+                                    </option>
+
+                                    <option value="Overig">
+                                        Overig
+                                    </option>
+
+                                </select>
+
+                            </label>
+
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Prijs
+                                </span>
+
+                                <div class="admin-price-input">
+
+                                    <span>
+                                        €
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="15,00"
+                                    >
+
+                                </div>
+
+                            </label>
+
+
+                            <label class="admin-field admin-field-wide">
+
+                                <span>
+                                    Beschrijving
+                                </span>
+
+                                <textarea
+                                    name="description"
+                                    rows="5"
+                                    placeholder="Vertel iets over dit product..."
+                                ></textarea>
+
+                            </label>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =========================
+                    PRODUCTFOTO'S
+                    ========================== -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-heading">
+
+                            <div>
+
+                                <span class="admin-step">
+                                    02
+                                </span>
+
+                                <h2>
+                                    Productfoto's
+                                </h2>
+
+                            </div>
+
+                            <p>
+                                Kies foto's uit de shop-map van de website.
+                                De eerste geselecteerde foto wordt de hoofdfoto.
+                            </p>
+
+                        </div>
+
+
+                        <div class="admin-image-picker">
+
+                            <p class="admin-empty-state">
+                                De afbeeldingen uit
+                                <strong>assets/images/shop</strong>
+                                worden hier automatisch geladen.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =========================
+                    VARIANTEN
+                    ========================== -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-heading">
+
+                            <div>
+
+                                <span class="admin-step">
+                                    03
+                                </span>
+
+                                <h2>
+                                    Varianten & voorraad
+                                </h2>
+
+                            </div>
+
+                            <p>
+                                Gebruik varianten voor bijvoorbeeld maten,
+                                kleuren of verschillende stickers.
+                            </p>
+
+                        </div>
+
+
+                        <div class="admin-toggle-row">
+
+                            <div>
+
+                                <strong>
+                                    Heeft dit product varianten?
+                                </strong>
+
+                                <span>
+                                    Bijvoorbeeld S / M / L of Sticker 1 / Sticker 2.
+                                </span>
+
+                            </div>
+
+
+                            <label class="admin-switch">
+
+                                <input
+                                    type="checkbox"
+                                    name="hasVariants"
+                                    data-variant-toggle
+                                >
+
+                                <span class="admin-switch-slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- Geen varianten -->
+
+                        <div
+                            class="admin-stock-simple"
+                            data-simple-stock
+                        >
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Voorraad
+                                </span>
+
+                                <input
+                                    type="number"
+                                    name="stock"
+                                    min="0"
+                                    step="1"
+                                    value="0"
+                                >
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- Wel varianten -->
+
+                        <div
+                            class="admin-variants"
+                            data-variants
+                            hidden
+                        >
+
+                            <label class="admin-field">
+
+                                <span>
+                                    Naam van de keuze
+                                </span>
+
+                                <input
+                                    type="text"
+                                    name="variantLabel"
+                                    placeholder="Bijvoorbeeld: Maat"
+                                >
+
+                            </label>
+
+
+                            <div
+                                class="admin-variant-list"
+                                data-variant-list
+                            >
+
+                                <div class="admin-variant-row">
+
+                                    <input
+                                        type="text"
+                                        placeholder="Bijvoorbeeld: S"
+                                        aria-label="Variant"
+                                    >
+
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        aria-label="Voorraad"
+                                    >
+
+                                    <button
+                                        class="admin-icon-button"
+                                        type="button"
+                                        aria-label="Verwijder variant"
+                                    >
+                                        ×
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="admin-button admin-button-secondary"
+                                type="button"
+                                data-add-variant
+                            >
+                                + Variant toevoegen
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =========================
+                    PUBLICATIE
+                    ========================== -->
+
+                    <section class="admin-panel">
+
+                        <div class="admin-panel-heading">
+
+                            <div>
+
+                                <span class="admin-step">
+                                    04
+                                </span>
+
+                                <h2>
+                                    Publicatie
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-toggle-row">
+
+                            <div>
+
+                                <strong>
+                                    Zichtbaar in webshop
+                                </strong>
+
+                                <span>
+                                    Het product wordt getoond aan bezoekers.
+                                </span>
+
+                            </div>
+
+
+                            <label class="admin-switch">
+
+                                <input
+                                    type="checkbox"
+                                    name="visible"
+                                    checked
+                                >
+
+                                <span class="admin-switch-slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =========================
+                    OPSLAAN
+                    ========================== -->
+
+                    <div class="admin-form-actions">
+
+                        <button
+                            class="admin-button admin-button-secondary"
+                            type="button"
+                            data-cancel-product
+                        >
+                            Annuleren
+                        </button>
+
+                        <button
+                            class="admin-button admin-button-primary"
+                            type="submit"
+                        >
+                            Product opslaan
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================
+            PLACEHOLDERS
+            ================================== -->
+
+            <section
+                class="admin-page"
+                data-admin-content="orders"
+            >
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <p class="admin-eyebrow">
+                            Binnenkort
+                        </p>
+
+                        <h1>
+                            Bestellingen
+                        </h1>
+
+                        <p>
+                            Hier komt later het overzicht van online bestellingen.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                class="admin-page"
+                data-admin-content="show-mode"
+            >
+
+                <div class="admin-page-header">
+
+                    <div>
+
+                        <p class="admin-eyebrow">
+                            Live merch
+                        </p>
+
+                        <h1>
+                            Show mode
+                        </h1>
+
+                        <p>
+                            Snelle verkoopregistratie voor achter de merchtafel.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
