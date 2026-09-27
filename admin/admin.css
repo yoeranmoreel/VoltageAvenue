@@ -3423,3 +3423,74 @@ img {
         overscroll-behavior: none;
     }
 }
+
+
+/* ========================================
+   REAL MOBILE ADMIN SHELL
+   Actual DOM: body > [data-auth-admin] > header + layout
+   ======================================== */
+@media (max-width:720px) {
+  body:has(.admin-dashboard-page.is-active) {
+    margin: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) {
+    height: 100dvh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto minmax(0,1fr);
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) > .admin-header {
+    position: relative;
+    z-index: 20;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) > .admin-layout {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Dashboard stays in normal flow now: no JS-measured floating top needed. */
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active)
+  .admin-dashboard-page.is-active {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: clamp(10px,1.35dvh,15px) clamp(12px,3vw,18px)
+             max(clamp(10px,1.35dvh,15px),env(safe-area-inset-bottom));
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active)
+  .admin-main {
+    width:100%;
+    height:100%;
+    min-height:0;
+    padding:0;
+    overflow:hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active)
+  .admin-dashboard-shell {
+    height:100%;
+    min-height:0;
+    display:grid;
+    grid-template-rows:auto minmax(0,1fr);
+    gap:clamp(10px,1.35dvh,14px);
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active)
+  .admin-dashboard-grid {
+    height:100%;
+    min-height:0;
+    grid-template-rows:minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr);
+  }
+}

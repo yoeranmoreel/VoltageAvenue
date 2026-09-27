@@ -231,6 +231,12 @@ const adminPages =
 
 function openAdminPage(pageName) {
 
+    if (pageName === "show-mode") {
+        queueMicrotask(() => {
+            void prepareShowMode();
+        });
+    }
+
     adminPages.forEach((page) => {
 
         const isActive =
@@ -4232,10 +4238,10 @@ function createShowProductCard(
 }
 
 
-async function getShowProductTotalStock(
-    product
+function getShowProductTotalStockFromMap(
+    product,
+    pendingStock
 ) {
-
     const hasVariants =
         Boolean(product.hasVariants) ||
         (
@@ -4245,27 +4251,33 @@ async function getShowProductTotalStock(
         );
 
     if (!hasVariants) {
-        return await getAvailableStock(
-            product,
-            null
+        const key =
+            getStockKey(product.id, null);
+
+        return Math.max(
+            0,
+            (Number(product.stock) || 0) -
+            (Number(pendingStock[key]) || 0)
         );
     }
 
-    let total = 0;
+    return Object.entries(product.stock || {})
+        .reduce(
+            (total, [variant, amount]) => {
+                const key =
+                    getStockKey(
+                        product.id,
+                        variant
+                    );
 
-    for (
-        const variant of
-        Object.keys(product.stock || {})
-    ) {
-        total +=
-            await getAvailableStock(
-                product,
-                variant
-            );
-    }
-
-    return total;
-
+                return total + Math.max(
+                    0,
+                    (Number(amount) || 0) -
+                    (Number(pendingStock[key]) || 0)
+                );
+            },
+            0
+        );
 }
 
 
@@ -4274,8 +4286,6 @@ async function renderShowProducts() {
     if (!showProducts) {
         return;
     }
-
-    showProducts.innerHTML = "";
 
     const products =
         [...adminProducts]
@@ -4293,30 +4303,38 @@ async function renderShowProducts() {
             );
 
     if (products.length === 0) {
-
         showProducts.innerHTML =
             '<p class="admin-muted">Geen zichtbare producten gevonden.</p>';
-
         return;
-
     }
 
-    for (const product of products) {
+    /*
+        One IndexedDB read for the entire screen.
+        Previously every product/variant reopened IndexedDB + getAll(),
+        which was especially slow on a real phone.
+    */
+    const pendingStock =
+        await getPendingStockMap();
 
+    const fragment =
+        document.createDocumentFragment();
+
+    for (const product of products) {
         const availableStock =
-            await getShowProductTotalStock(
-                product
+            getShowProductTotalStockFromMap(
+                product,
+                pendingStock
             );
 
-        showProducts.appendChild(
+        fragment.appendChild(
             createShowProductCard(
                 product,
                 availableStock
             )
         );
-
     }
 
+    showProducts.replaceChildren(fragment);
 }
 
 
@@ -4329,6 +4347,40 @@ function escapeHtml(value) {
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 
+}
+
+
+let showModePreparing = false;
+
+async function prepareShowMode() {
+    if (showModePreparing) return;
+    showModePreparing = true;
+
+    try {
+        /*
+            Products are already fetched after login.
+            Do NOT wait for another Firestore request just to open the till.
+        */
+        if (adminProducts.length === 0) {
+            await loadAdminProducts();
+        }
+
+        await Promise.all([
+            renderShowProducts(),
+            updateSyncStatus()
+        ]);
+
+        /*
+            Pending cloud sync may be slower; it runs after the till is visible
+            instead of blocking product cards.
+        */
+        if (navigator.onLine) {
+            void syncPendingShowSales();
+        }
+    }
+    finally {
+        showModePreparing = false;
+    }
 }
 
 
@@ -4346,34 +4398,6 @@ if (clearShowSessionButton) {
 
 }
 
-
-navigationButtons.forEach(
-    (button) => {
-
-        if (
-            button.dataset.adminPage ===
-            "show-mode"
-        ) {
-
-            button.addEventListener(
-                "click",
-                async () => {
-
-                    await loadAdminProducts();
-                    await renderShowProducts();
-                    await updateSyncStatus();
-
-                    if (navigator.onLine) {
-                        syncPendingShowSales();
-                    }
-
-                }
-            );
-
-        }
-
-    }
-);
 
 
 window.addEventListener(
