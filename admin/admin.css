@@ -3494,3 +3494,110 @@ img {
     grid-template-rows:minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr);
   }
 }
+
+/* ========================================
+   MOBILE DASHBOARD — CANONICAL VIEWPORT LAYOUT
+   One final source of truth for the dashboard.
+   ======================================== */
+@media (max-width: 720px) {
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) > .admin-header {
+    position: relative;
+    top: auto;
+    z-index: 20;
+    width: 100%;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) > .admin-layout {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-sidebar {
+    display: none;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-main {
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-page.is-active {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: auto;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding:
+      clamp(10px, 1.35dvh, 15px)
+      clamp(12px, 3vw, 18px)
+      max(clamp(10px, 1.35dvh, 15px), env(safe-area-inset-bottom));
+    overflow: hidden;
+    background: #080808;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-shell {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-intro {
+    display: none;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-grid {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows:
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(0, 1.15fr);
+    gap: clamp(8px, 1.1dvh, 12px);
+    overflow: hidden;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-tile {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+  }
+
+  [data-auth-admin]:not([hidden]):has(.admin-dashboard-page.is-active) .admin-dashboard-tile-show {
+    grid-column: 1 / -1;
+    height: 100%;
+    min-height: 0;
+  }
+}
