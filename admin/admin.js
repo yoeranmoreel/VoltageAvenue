@@ -295,27 +295,66 @@ function updateDashboardViewport() {
     const header =
         document.querySelector(".admin-header");
 
-    const height =
-        header?.getBoundingClientRect().height || 0;
+    if (!header) return;
+
+    /*
+        Use the header's ACTUAL bottom edge in the viewport instead of only
+        its height. This also accounts for any top inset/margin/browser layout.
+    */
+    const rect =
+        header.getBoundingClientRect();
 
     document.documentElement.style.setProperty(
-        "--admin-header-height",
-        `${height}px`
+        "--admin-header-bottom",
+        `${Math.ceil(rect.bottom)}px`
     );
+}
+
+function scheduleDashboardViewportUpdate() {
+    updateDashboardViewport();
+
+    requestAnimationFrame(() => {
+        updateDashboardViewport();
+
+        requestAnimationFrame(
+            updateDashboardViewport
+        );
+    });
 }
 
 window.addEventListener(
     "resize",
-    updateDashboardViewport,
+    scheduleDashboardViewportUpdate,
     { passive: true }
 );
 
 window.addEventListener(
     "orientationchange",
-    updateDashboardViewport
+    scheduleDashboardViewportUpdate
 );
 
-updateDashboardViewport();
+window.addEventListener(
+    "load",
+    scheduleDashboardViewportUpdate
+);
+
+document.fonts?.ready.then(
+    scheduleDashboardViewportUpdate
+);
+
+const adminHeader =
+    document.querySelector(".admin-header");
+
+if (adminHeader && "ResizeObserver" in window) {
+    const headerResizeObserver =
+        new ResizeObserver(
+            scheduleDashboardViewportUpdate
+        );
+
+    headerResizeObserver.observe(adminHeader);
+}
+
+scheduleDashboardViewportUpdate();
 
 
 // ========================================

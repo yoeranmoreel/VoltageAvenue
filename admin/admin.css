@@ -3338,7 +3338,7 @@ img {
         position: fixed;
         z-index: 2;
 
-        top: var(--admin-header-height, 64px);
+        top: var(--admin-header-bottom, 64px);
         right: 0;
         bottom: 0;
         left: 0;
@@ -3406,5 +3406,20 @@ img {
 
     body:has(.admin-dashboard-page.is-active) .admin-dashboard-tile-show {
         grid-column: 1 / -1;
+    }
+}
+
+
+/* Header overlap guard */
+@media (max-width: 720px) {
+    body:has(.admin-dashboard-page.is-active) > .admin-header {
+        position: relative;
+        z-index: 20;
+    }
+
+    body:has(.admin-dashboard-page.is-active)
+    .admin-dashboard-page.is-active {
+        z-index: 2;
+        overscroll-behavior: none;
     }
 }
