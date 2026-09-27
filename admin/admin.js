@@ -109,15 +109,20 @@ if (loginForm) {
             const formData =
                 new FormData(loginForm);
 
-            const email =
-                String(
-                    formData.get("email") || ""
-                ).trim();
+            const loginName =
+    String(
+        formData.get("email") || ""
+    ).trim();
 
-            const password =
-                String(
-                    formData.get("password") || ""
-                );
+const email =
+    loginName.toLowerCase() === "vamerch"
+        ? "merch@voltageavenue.nl"
+        : loginName;
+
+const password =
+    String(
+        formData.get("password") || ""
+    );
 
             try {
 
