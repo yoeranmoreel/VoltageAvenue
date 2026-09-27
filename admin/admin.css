@@ -1442,3 +1442,386 @@ img {
     }
 
 }
+
+/* ========================================
+   PRODUCT IMAGE PICKER
+   ======================================== */
+
+.admin-image-picker {
+    display: grid;
+    gap: 24px;
+}
+
+.admin-selected-images,
+.admin-available-images {
+    display: grid;
+    gap: 12px;
+}
+
+.admin-image-picker-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.admin-image-picker-heading > div {
+    display: grid;
+    gap: 3px;
+}
+
+.admin-image-picker-heading strong {
+    font-size: 0.95rem;
+}
+
+.admin-image-picker-heading span {
+    color: var(--admin-muted);
+    font-size: 0.78rem;
+}
+
+.admin-image-count {
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   BESCHIKBARE FOTO'S
+   ======================================== */
+
+.admin-image-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.admin-image-option {
+    min-width: 0;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: left;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.admin-image-option-preview {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--admin-surface);
+}
+
+.admin-image-option-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.admin-image-option-name {
+    display: block;
+    padding: 5px 2px 2px;
+    color: var(--admin-muted);
+    font-size: 0.68rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+.admin-image-check {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.45);
+    color: transparent;
+
+    font-size: 0.8rem;
+    font-weight: 900;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.admin-image-option.is-selected {
+    border-color: var(--admin-orange);
+}
+
+.admin-image-option.is-selected .admin-image-check {
+    border-color: var(--admin-orange);
+    background: var(--admin-orange);
+    color: #000;
+}
+
+
+/* ========================================
+   GESELECTEERDE FOTO'S
+   ======================================== */
+
+.admin-selected-image-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.admin-selected-image {
+    min-width: 0;
+    padding: 6px;
+    border: 1px solid var(--admin-border);
+    border-radius: 10px;
+    background: var(--admin-surface);
+}
+
+.admin-selected-image-preview {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 7px;
+    background: #111;
+}
+
+.admin-selected-image-preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-image-order {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    display: grid;
+    place-items: center;
+
+    min-width: 23px;
+    height: 23px;
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #000;
+    color: #fff;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.admin-main-image-badge {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+    padding: 4px 6px;
+
+    border-radius: 999px;
+
+    background: var(--admin-orange);
+    color: #000;
+
+    font-size: 0.58rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.admin-selected-image-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.admin-image-move,
+.admin-image-remove {
+    display: grid;
+    place-items: center;
+
+    min-width: 0;
+    height: 30px;
+    padding: 0;
+
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+
+    background: transparent;
+    color: #fff;
+
+    font: inherit;
+    font-size: 0.9rem;
+
+    cursor: pointer;
+}
+
+.admin-image-move:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.admin-image-remove {
+    color: #ff7676;
+}
+
+.admin-selected-empty {
+    grid-column: 1 / -1;
+    padding: 14px;
+
+    border: 1px dashed var(--admin-border);
+    border-radius: 9px;
+
+    color: var(--admin-muted);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+/* ========================================
+   LADEN / FOUT
+   ======================================== */
+
+.admin-empty-state,
+.admin-image-error {
+    padding: 16px;
+    border: 1px dashed var(--admin-border);
+    border-radius: 10px;
+    color: var(--admin-muted);
+}
+
+.admin-image-error {
+    display: grid;
+    gap: 4px;
+}
+
+.admin-image-error strong {
+    color: #fff;
+}
+
+
+/* ========================================
+   TABLET
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .admin-image-grid,
+    .admin-selected-image-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+}
+
+
+/* ========================================
+   TELEFOON
+   ======================================== */
+
+@media (max-width: 520px) {
+
+    .admin-image-picker {
+        gap: 20px;
+    }
+
+    .admin-image-picker-heading {
+        align-items: flex-start;
+    }
+
+    .admin-image-picker-heading span {
+        font-size: 0.72rem;
+    }
+
+    /*
+       3 foto's naast elkaar:
+       groot genoeg om bewust te kiezen,
+       klein genoeg om prettig te scrollen.
+    */
+    .admin-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .admin-selected-image-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .admin-image-option {
+        border-radius: 8px;
+    }
+
+    .admin-image-option-preview {
+        border-radius: 6px;
+    }
+
+    .admin-image-option-name {
+        padding-top: 4px;
+        font-size: 0.61rem;
+    }
+
+    .admin-image-check {
+        top: 5px;
+        right: 5px;
+        width: 21px;
+        height: 21px;
+        font-size: 0.7rem;
+    }
+
+    .admin-selected-image {
+        padding: 4px;
+        border-radius: 8px;
+    }
+
+    .admin-selected-image-actions {
+        gap: 3px;
+        margin-top: 4px;
+    }
+
+    .admin-image-move,
+    .admin-image-remove {
+        height: 28px;
+        border-radius: 5px;
+        font-size: 0.82rem;
+    }
+
+    .admin-main-image-badge {
+        max-width: calc(100% - 10px);
+        overflow: hidden;
+        font-size: 0.5rem;
+        white-space: nowrap;
+    }
+
+}
+
+
+/* ========================================
+   EXTRA KLEINE TELEFOON
+   ======================================== */
+
+@media (max-width: 360px) {
+
+    .admin-image-option-name {
+        display: none;
+    }
+
+}
