@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-27",
+  "generated": "2026-10-14",
   "basePath": "assets/images/shop/",
   "images": [
     "01_tshirt_wit_closeup.png",
@@ -19,6 +19,7 @@
     "15_stickers_closeup.png",
     "16_stickers_lifestyle.png",
     "17_mok_closeup.png",
-    "18_mok_lifestyle.png"
+    "18_mok_lifestyle.png",
+    "hero-shop.jpg"
   ]
 }
