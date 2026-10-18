@@ -661,7 +661,7 @@ const fallingRelease = {
 
     // Deze vullen we in zodra de links bekend zijn.
     reminderUrl: "https://41eef1c3.sibforms.com/serve/MUIFAHP5u-djS1_HnoPXvOcqrg9C9ppHNTxzup4aw9vC4L-8U4953dFuXNKW_omU1WtLKqDvpwDPacKMJaEzAjBXnfIRcKa1HY9SGqfZ6qCKIx7Oxpm1BemgvYpnA35bfKGXm6xZDRjAoe8PjM8e8dUibQM-LpPnyjejSQakT_zqTTOD0tLkHgAHJe_6yqsgVCbUskSvtvkKSMjZdA%3D%3D",
-    spotifyUrl: "https://open.spotify.com/artist/5LbERo4SHiSSfuX3TbL9Qq"
+    spotifyUrl: "https://open.spotify.com/track/4RbmpUEB7oe4kqe9C7gy18"
 };
 
 const fallingCampaign = document.querySelector("#falling-release");
