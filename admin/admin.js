@@ -206,6 +206,8 @@ onAuthStateChanged(
                 !user;
         }
 
+        const analyticsAllowed = Boolean(user && user.email && user.email.toLowerCase() !== "merch@voltageavenue.nl");
+        document.querySelectorAll("[data-analytics-admin-only]").forEach((element) => { element.hidden = !analyticsAllowed; });
         if (user) {
             openAdminPage("dashboard");
             loadAdminProducts();
@@ -235,6 +237,7 @@ const adminPages =
 // ========================================
 
 function openAdminPage(pageName) {
+    if (pageName === "analytics" && (!auth.currentUser?.email || auth.currentUser.email.toLowerCase() === "merch@voltageavenue.nl")) return;
 
     if (pageName === "analytics") { queueMicrotask(() => { void loadAnalytics(); }); }
 
