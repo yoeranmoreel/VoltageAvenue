@@ -1,32 +1,87 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#100d15">
-<meta name="description" content="Countdown to Falling, the new single by Voltage Avenue. Out November 20, 2026.">
-<title>FALLING — Voltage Avenue</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111218">
+<meta name="description" content="FALLING — the new single by Voltage Avenue. November 20, 2026. Watch the live countdown.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FALLING — Voltage Avenue">
+<meta property="og:description" content="The countdown is on. November 20, 2026.">
+<meta property="og:image" content="https://voltageavenue.online/assets/images/falling-artwork.jpeg">
+<title>FALLING — Voltage Avenue | Live Countdown</title>
 <style>
-:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 35%,#572b2c 0%,#1e1720 45%,#0c0b10 100%);color:#fff;display:grid;place-items:center;text-align:center;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;background:linear-gradient(130deg,transparent 30%,#e6503520 55%,transparent 75%);pointer-events:none}.wrap{width:min(94%,760px);padding:55px 14px;position:relative}.eyebrow{font-size:.75rem;letter-spacing:.36em;font-weight:800;color:#ffb5a2}.name{font-weight:900;letter-spacing:.13em;margin:14px 0 32px;font-size:clamp(1rem,3vw,1.5rem)}h1{font-size:clamp(4.5rem,16vw,10rem);letter-spacing:-.075em;line-height:.85;margin:0 0 24px;font-weight:1000;text-shadow:0 14px 50px #0008}.sub{letter-spacing:.25em;text-transform:uppercase;font-weight:700;font-size:.85rem;color:#f4d9d3;margin-bottom:36px}.timer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(5px,1.5vw,12px);margin:0 auto 35px;max-width:640px}.unit{padding:clamp(12px,3vw,24px) 2px;border:1px solid #ffffff38;background:#ffffff0b;backdrop-filter:blur(10px);border-radius:12px}.num{font-size:clamp(2rem,8vw,4.8rem);font-weight:900;font-variant-numeric:tabular-nums}.label{font-size:clamp(.55rem,1.7vw,.72rem);letter-spacing:.18em;color:#e7b8af;margin-top:8px}.button{display:inline-block;padding:17px 30px;background:#f36542;color:#160e0e;text-decoration:none;font-weight:900;letter-spacing:.07em;border-radius:5px;transition:transform .2s,background .2s}.button:hover{transform:translateY(-3px);background:#ff9575}.small{font-size:.8rem;color:#d9b9b5;margin-top:22px}.out{display:none}.released .before{display:none}.released .out{display:block}.released .timer{display:none}.released h1{margin-bottom:34px}a:focus-visible{outline:3px solid white;outline-offset:4px}@media(prefers-reduced-motion:reduce){.button{transition:none}}
+:root{color-scheme:dark;--amber:#ffb36a;--ink:#101116;--white:#f6f4ef;font-family:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100svh;background:var(--ink);color:var(--white);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-15%;z-index:-2;background:url("../assets/images/falling-artwork.jpeg") center/cover no-repeat;filter:blur(65px) brightness(.24) saturate(.75);transform:scale(1.12);pointer-events:none}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#11121860,#111218d9 65%,#111218);pointer-events:none}
+.page{width:min(1100px,calc(100% - 36px));margin:auto;padding:24px 0 60px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:32px}
+.brand{font-size:.85rem;font-weight:900;letter-spacing:.16em;text-decoration:none;color:#fff}
+.top-note{font-size:.64rem;letter-spacing:.18em;font-weight:800;color:var(--amber);text-align:right}
+.layout{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,1fr);gap:clamp(30px,5vw,75px);align-items:center}
+.art-frame{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:1;box-shadow:0 24px 90px #000a,0 0 0 1px #ffffff26}
+.art-frame::after{content:"";position:absolute;inset:0;border:1px solid #ffffff18;pointer-events:none}
+.art{width:100%;height:100%;display:block;object-fit:contain;animation:breathe 18s ease-in-out infinite alternate;transform-origin:center}
+@keyframes breathe{from{transform:scale(1)}to{transform:scale(1.055)}}
+.meta{font-size:.72rem;font-weight:900;letter-spacing:.28em;color:var(--amber);margin:0 0 12px}
+.heading{font-size:clamp(3.6rem,8vw,7.2rem);font-weight:900;letter-spacing:-.08em;line-height:.9;margin:0 0 15px}
+.sub{font-size:.75rem;letter-spacing:.2em;line-height:1.7;font-weight:800;color:#e9e3df;margin:0 0 28px}
+.count-label{font-size:.68rem;font-weight:900;letter-spacing:.22em;color:var(--amber);margin:0 0 12px}
+.timer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:24px}
+.unit{padding:16px 3px 13px;border-top:1px solid #ffffff85;border-bottom:1px solid #ffffff85;text-align:center}
+.num{font-size:clamp(1.45rem,3.6vw,2.9rem);font-weight:900;font-variant-numeric:tabular-nums;line-height:1.1}
+.label{font-size:.58rem;font-weight:800;letter-spacing:.1em;color:#c9c5c3;margin-top:9px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:15px 25px;background:var(--amber);color:#171318;font-weight:900;font-size:.8rem;letter-spacing:.09em;text-decoration:none;transition:transform .2s,background .2s}
+.button:hover{transform:translateY(-3px);background:#ffca91}
+.small{font-size:.72rem;line-height:1.6;color:#c8c2c0;margin:14px 0 0}
+.out{display:none}.released .before{display:none}.released .out{display:block}
+.released .count-label,.released .timer{display:none}
+.released .heading{margin-bottom:24px}
+.footer{margin-top:42px;padding-top:18px;border-top:1px solid #ffffff25;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#aaa5a5;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase}
+.footer a{color:#eee;text-decoration:none}
+a:focus-visible{outline:3px solid var(--amber);outline-offset:5px}
+@media(max-width:750px){.page{width:min(520px,calc(100% - 32px));padding-top:20px}.topbar{margin-bottom:23px}.layout{grid-template-columns:1fr;gap:28px}.art-frame{width:min(100%,430px);margin:auto}.details{text-align:center}.heading{font-size:clamp(3.5rem,15vw,5.5rem)}.timer{max-width:470px;margin:0 auto 24px}.footer{margin-top:36px}}
+@media(max-width:400px){.brand{font-size:.7rem}.top-note{font-size:.56rem}.art-frame{width:min(100%,330px)}.unit{padding:12px 2px}.num{font-size:1.6rem}.label{font-size:.5rem}.sub{margin-bottom:20px}}
+@media(prefers-reduced-motion:reduce){.art{animation:none}.button{transition:none}}
 </style>
 </head>
 <body>
-<main class="wrap" id="page">
-<p class="eyebrow">NEW SINGLE</p><div class="name">VOLTAGE AVENUE</div>
-<h1>FALLING</h1>
+<main class="page" id="page">
+<header class="topbar"><a class="brand" href="../">VOLTAGE AVENUE</a><span class="top-note">NEW SINGLE · 20.11.26</span></header>
+<div class="layout">
+<div class="art-frame"><img class="art" src="../assets/images/falling-artwork.jpeg" alt="Original Falling single artwork by Voltage Avenue" width="1200" height="1200" fetchpriority="high"></div>
+<section class="details" aria-label="Falling release countdown">
+<p class="meta">THE WAIT IS ALMOST OVER</p>
+<h1 class="heading">FALLING</h1>
 <p class="sub before">NOVEMBER 20, 2026 · 00:00 CET</p>
-<div class="timer before" aria-label="Time until release">
+<p class="count-label before">DROPS IN</p>
+<div class="timer before" role="timer" aria-label="Time remaining until Falling is released">
 <div class="unit"><div class="num" id="days">00</div><div class="label">DAYS</div></div>
 <div class="unit"><div class="num" id="hours">00</div><div class="label">HOURS</div></div>
-<div class="unit"><div class="num" id="minutes">00</div><div class="label">MINUTES</div></div>
-<div class="unit"><div class="num" id="seconds">00</div><div class="label">SECONDS</div></div>
+<div class="unit"><div class="num" id="minutes">00</div><div class="label">MIN</div></div>
+<div class="unit"><div class="num" id="seconds">00</div><div class="label">SEC</div></div>
 </div>
-<div class="before"><a class="button" href="https://voltageavenue.nl/falling">GET A RELEASE REMINDER ↗</a><p class="small">No Spotify permissions. Just a reminder when it drops.</p></div>
-<div class="out"><p class="sub">OUT NOW · TURN IT UP</p><a class="button" href="https://open.spotify.com/search/Voltage%20Avenue%20Falling">LISTEN ON SPOTIFY ↗</a><p class="small">Spotify search link until the official release URL is available.</p></div>
+<div class="before"><a class="button" href="https://voltageavenue.nl/falling" target="_blank" rel="noopener noreferrer">REMIND ME ↗</a><p class="small">Get a reminder when Falling drops. No Spotify permissions required.</p></div>
+<div class="out"><p class="sub">OUT NOW · TURN IT UP</p><a class="button" href="https://open.spotify.com/search/Voltage%20Avenue%20Falling" target="_blank" rel="noopener noreferrer">LISTEN ON SPOTIFY ↗</a></div>
+</section>
+</div>
+<footer class="footer"><span>© VOLTAGE AVENUE</span><a href="../">BACK TO WEBSITE ↗</a></footer>
 </main>
 <script>
-const release=Date.parse('2026-11-20T00:00:00+01:00');
-const els=['days','hours','minutes','seconds'].map(id=>document.getElementById(id));
-function tick(){const delta=Math.max(0,Math.floor((release-Date.now())/1000));if(!delta){document.getElementById('page').classList.add('released');return}const vals=[Math.floor(delta/86400),Math.floor(delta/3600)%24,Math.floor(delta/60)%60,delta%60];vals.forEach((v,i)=>els[i].textContent=String(v).padStart(2,'0'))}
-tick();setInterval(tick,1000);document.addEventListener('visibilitychange',tick);
+const release=Date.parse("2026-11-20T00:00:00+01:00");
+const page=document.getElementById("page");
+const els=["days","hours","minutes","seconds"].map(id=>document.getElementById(id));
+function tick(){
+ const delta=Math.max(0,Math.ceil((release-Date.now())/1000));
+ if(delta===0){page.classList.add("released");return}
+ page.classList.remove("released");
+ const values=[Math.floor(delta/86400),Math.floor(delta/3600)%24,Math.floor(delta/60)%60,delta%60];
+ values.forEach((v,i)=>els[i].textContent=String(v).padStart(2,"0"));
+}
+tick();setInterval(tick,1000);document.addEventListener("visibilitychange",tick);
 </script>
-</body></html>
+</body>
+</html>
