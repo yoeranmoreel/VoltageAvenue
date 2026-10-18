@@ -175,6 +175,41 @@ animation:mobileEdgeGlow 8s ease-in-out infinite alternate;will-change:opacity
 @media(max-width:750px) and (prefers-reduced-motion:reduce){
 .artwork,.art-atmosphere::before,.art-atmosphere::after,.art-ember{animation:none}
 }
+
+/* ORIGINAL EDITORIAL MOBILE LAYOUT + CURRENT CINEMATIC ATMOSPHERE */
+.mobile-topbar,.mobile-intro{display:none}
+@media(max-width:750px){
+.page{width:min(100%,540px);padding:18px 16px 28px;justify-content:flex-start}
+.mobile-topbar{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;margin:0 0 25px;font-weight:900;letter-spacing:.16em}
+.mobile-topbar a{font-size:clamp(.75rem,3vw,1.05rem);color:var(--paper);text-decoration:none;white-space:nowrap}
+.mobile-topbar span{font-size:clamp(.55rem,2.3vw,.78rem);color:var(--gold);text-align:right;white-space:nowrap}
+.stage{width:100%}
+.art-shell{width:100%;max-width:470px;margin:0 auto}
+.release{width:100%;max-width:470px;margin:0 auto;text-align:center}
+.mobile-intro{display:block;padding:27px 0 25px}
+.mobile-intro p{font-size:clamp(.67rem,2.7vw,.83rem);font-weight:900;letter-spacing:.26em;color:var(--gold);margin:0 0 14px}
+.mobile-intro h1{font-size:clamp(3.7rem,15vw,5.8rem);font-weight:900;letter-spacing:-.075em;line-height:.95;margin:0 0 24px}
+.mobile-intro span{font-size:clamp(.66rem,2.5vw,.85rem);font-weight:900;letter-spacing:.18em;line-height:1.5}
+.count-panel{width:100%;padding:0;background:none;border:0;border-radius:0;box-shadow:none}
+.count-kicker{margin:0 0 17px;font-size:.74rem;letter-spacing:.26em}
+.count-kicker::before,.count-kicker::after{display:none}
+.timer{width:100%;padding:0;background:none;border:0;box-shadow:none}
+.unit{padding:15px 3px 14px;border-top:1px solid #ffffff9c;border-bottom:1px solid #ffffff9c}
+.unit:not(:last-child)::after{display:none}
+.num{font-size:clamp(1.7rem,6.5vw,2.5rem)}
+.label{font-size:.58rem;letter-spacing:.12em;margin-top:8px}
+.actions{margin-top:32px}
+.button{min-width:215px;min-height:55px}
+.small{margin-top:19px;max-width:100%;font-size:.75rem}
+.footer{width:100%;max-width:470px;margin-top:46px;padding-top:20px}
+.released .mobile-intro{padding-bottom:20px}
+.released .mobile-intro p{display:none}
+}
+@media(max-width:380px){
+.mobile-topbar{letter-spacing:.1em}
+.mobile-intro{padding-top:23px}
+.mobile-intro h1{font-size:15vw}
+}
 </style>
 </head>
 <body>
@@ -195,6 +230,7 @@ animation:mobileEdgeGlow 8s ease-in-out infinite alternate;will-change:opacity
 </div>
 </div>
 <main class="page" id="page">
+<header class="mobile-topbar"><a href="../">VOLTAGE AVENUE</a><span>NEW SINGLE · 20.11.26</span></header>
 <div class="stage">
 <div class="art-shell">
 <div class="art-mask">
@@ -211,6 +247,7 @@ animation:mobileEdgeGlow 8s ease-in-out infinite alternate;will-change:opacity
 </div>
 </div>
 <section class="release" aria-label="Falling release countdown">
+<div class="mobile-intro"><p>THE WAIT IS ALMOST OVER</p><h1>FALLING</h1><span>NOVEMBER 20, 2026 · 00:00 CET</span></div>
 <div class="count-panel before">
 <p class="count-kicker">DROPS IN</p>
 <div class="timer" role="timer" aria-label="Live countdown to November 20, 2026">
