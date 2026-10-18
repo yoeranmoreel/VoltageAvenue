@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100d15">
+<meta name="description" content="Countdown to Falling, the new single by Voltage Avenue. Out November 20, 2026.">
+<title>FALLING — Voltage Avenue</title>
+<style>
+:root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 35%,#572b2c 0%,#1e1720 45%,#0c0b10 100%);color:#fff;display:grid;place-items:center;text-align:center;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;background:linear-gradient(130deg,transparent 30%,#e6503520 55%,transparent 75%);pointer-events:none}.wrap{width:min(94%,760px);padding:55px 14px;position:relative}.eyebrow{font-size:.75rem;letter-spacing:.36em;font-weight:800;color:#ffb5a2}.name{font-weight:900;letter-spacing:.13em;margin:14px 0 32px;font-size:clamp(1rem,3vw,1.5rem)}h1{font-size:clamp(4.5rem,16vw,10rem);letter-spacing:-.075em;line-height:.85;margin:0 0 24px;font-weight:1000;text-shadow:0 14px 50px #0008}.sub{letter-spacing:.25em;text-transform:uppercase;font-weight:700;font-size:.85rem;color:#f4d9d3;margin-bottom:36px}.timer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(5px,1.5vw,12px);margin:0 auto 35px;max-width:640px}.unit{padding:clamp(12px,3vw,24px) 2px;border:1px solid #ffffff38;background:#ffffff0b;backdrop-filter:blur(10px);border-radius:12px}.num{font-size:clamp(2rem,8vw,4.8rem);font-weight:900;font-variant-numeric:tabular-nums}.label{font-size:clamp(.55rem,1.7vw,.72rem);letter-spacing:.18em;color:#e7b8af;margin-top:8px}.button{display:inline-block;padding:17px 30px;background:#f36542;color:#160e0e;text-decoration:none;font-weight:900;letter-spacing:.07em;border-radius:5px;transition:transform .2s,background .2s}.button:hover{transform:translateY(-3px);background:#ff9575}.small{font-size:.8rem;color:#d9b9b5;margin-top:22px}.out{display:none}.released .before{display:none}.released .out{display:block}.released .timer{display:none}.released h1{margin-bottom:34px}a:focus-visible{outline:3px solid white;outline-offset:4px}@media(prefers-reduced-motion:reduce){.button{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap" id="page">
+<p class="eyebrow">NEW SINGLE</p><div class="name">VOLTAGE AVENUE</div>
+<h1>FALLING</h1>
+<p class="sub before">NOVEMBER 20, 2026 · 00:00 CET</p>
+<div class="timer before" aria-label="Time until release">
+<div class="unit"><div class="num" id="days">00</div><div class="label">DAYS</div></div>
+<div class="unit"><div class="num" id="hours">00</div><div class="label">HOURS</div></div>
+<div class="unit"><div class="num" id="minutes">00</div><div class="label">MINUTES</div></div>
+<div class="unit"><div class="num" id="seconds">00</div><div class="label">SECONDS</div></div>
+</div>
+<div class="before"><a class="button" href="https://voltageavenue.nl/falling">GET A RELEASE REMINDER ↗</a><p class="small">No Spotify permissions. Just a reminder when it drops.</p></div>
+<div class="out"><p class="sub">OUT NOW · TURN IT UP</p><a class="button" href="https://open.spotify.com/search/Voltage%20Avenue%20Falling">LISTEN ON SPOTIFY ↗</a><p class="small">Spotify search link until the official release URL is available.</p></div>
+</main>
+<script>
+const release=Date.parse('2026-11-20T00:00:00+01:00');
+const els=['days','hours','minutes','seconds'].map(id=>document.getElementById(id));
+function tick(){const delta=Math.max(0,Math.floor((release-Date.now())/1000));if(!delta){document.getElementById('page').classList.add('released');return}const vals=[Math.floor(delta/86400),Math.floor(delta/3600)%24,Math.floor(delta/60)%60,delta%60];vals.forEach((v,i)=>els[i].textContent=String(v).padStart(2,'0'))}
+tick();setInterval(tick,1000);document.addEventListener('visibilitychange',tick);
+</script>
+</body></html>
