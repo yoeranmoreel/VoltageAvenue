@@ -650,3 +650,131 @@ if (gallery && lightbox) {
   }
 
 }
+
+/* ========================================
+   FALLING RELEASE CAMPAIGN
+======================================== */
+
+const fallingRelease = {
+    releaseDate: "2026-11-20T00:00:00+01:00",
+    postReleaseDate: "2026-12-04T00:00:00+01:00",
+
+    // Deze vullen we in zodra de links bekend zijn.
+    reminderUrl: "#",
+    spotifyUrl: "https://open.spotify.com/artist/5LbERo4SHiSSfuX3TbL9Qq"
+};
+
+const fallingCampaign = document.querySelector("#falling-release");
+
+if (fallingCampaign) {
+    const releaseDate = new Date(fallingRelease.releaseDate);
+    const postReleaseDate = new Date(fallingRelease.postReleaseDate);
+
+    const presavePhase = fallingCampaign.querySelector(
+        ".release-phase-presave"
+    );
+
+    const outNowPhase = fallingCampaign.querySelector(
+        ".release-phase-out-now"
+    );
+
+    const latestPhase = fallingCampaign.querySelector(
+        ".release-phase-latest"
+    );
+
+    const daysElement = fallingCampaign.querySelector(
+        "[data-countdown-days]"
+    );
+
+    const hoursElement = fallingCampaign.querySelector(
+        "[data-countdown-hours]"
+    );
+
+    const minutesElement = fallingCampaign.querySelector(
+        "[data-countdown-minutes]"
+    );
+
+    const secondsElement = fallingCampaign.querySelector(
+        "[data-countdown-seconds]"
+    );
+
+    const reminderLink = fallingCampaign.querySelector(
+        "[data-reminder-link]"
+    );
+
+    const spotifyLink = fallingCampaign.querySelector(
+        "[data-spotify-link]"
+    );
+
+    const latestLink = fallingCampaign.querySelector(
+        "[data-latest-link]"
+    );
+
+    reminderLink.href = fallingRelease.reminderUrl;
+    spotifyLink.href = fallingRelease.spotifyUrl;
+    latestLink.href = fallingRelease.spotifyUrl;
+
+    function showReleasePhase(phase) {
+        presavePhase.hidden = phase !== "presave";
+        outNowPhase.hidden = phase !== "out-now";
+        latestPhase.hidden = phase !== "latest";
+    }
+
+    function updateFallingCampaign() {
+        const now = new Date();
+
+        /*
+         * FASE 3
+         * Vanaf 4 december:
+         * Latest Release
+         */
+        if (now >= postReleaseDate) {
+            showReleasePhase("latest");
+            return;
+        }
+
+        /*
+         * FASE 2
+         * Vanaf 20 november:
+         * Falling — OUT NOW!
+         */
+        if (now >= releaseDate) {
+            showReleasePhase("out-now");
+            return;
+        }
+
+        /*
+         * FASE 1
+         * Voor 20 november:
+         * countdown
+         */
+        showReleasePhase("presave");
+
+        const difference = releaseDate - now;
+
+        const days = Math.floor(
+            difference / (1000 * 60 * 60 * 24)
+        );
+
+        const hours = Math.floor(
+            (difference / (1000 * 60 * 60)) % 24
+        );
+
+        const minutes = Math.floor(
+            (difference / (1000 * 60)) % 60
+        );
+
+        const seconds = Math.floor(
+            (difference / 1000) % 60
+        );
+
+        daysElement.textContent = String(days).padStart(2, "0");
+        hoursElement.textContent = String(hours).padStart(2, "0");
+        minutesElement.textContent = String(minutes).padStart(2, "0");
+        secondsElement.textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateFallingCampaign();
+
+    setInterval(updateFallingCampaign, 1000);
+}

@@ -115,7 +115,29 @@ footer a:hover,
     justify-content: center;
     text-align: center;
     padding: 130px 20px 80px;
-    background: linear-gradient(180deg, #0008, #0005 50%, #000d), url('assets/images/Promo+foto+optie+2-1920w.png') center/cover no-repeat
+
+    background:
+        linear-gradient(180deg, #0008, #0005 50%, #000d),
+        url('assets/images/Promo+foto+optie+2-1920w.png');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 30%;
+}
+
+/* Tablet */
+@media (max-width: 1000px) and (min-width: 601px) {
+    .hero {
+        background-size: auto 100%;
+        background-position: center top;
+        background-color: #000;
+    }
+}
+@media (max-width: 600px) {
+    .hero {
+        background-size: cover;
+        background-position: center 30%;
+    }
 }
 
 .hero-content {
@@ -2110,4 +2132,172 @@ footer {
     font-weight: 800;
     letter-spacing: .08em;
     text-transform: uppercase;
+}
+
+/* ========================================
+   FALLING RELEASE CAMPAIGN
+======================================== */
+
+.release-campaign {
+    width: min(100%, 560px);
+    margin: 28px auto 0;
+    font-family: Montserrat, Arial, sans-serif;
+    text-align: center;
+}
+
+.release-phase {
+    position: relative;
+}
+
+.release-phase[hidden] {
+    display: none;
+}
+
+.release-kicker {
+    display: inline-block;
+    margin: 0 0 4px;
+    padding: 4px 9px;
+    background: var(--orange);
+    color: var(--black);
+    font-size: .65rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transform: rotate(-2deg);
+}
+
+.release-title {
+    margin: 3px 0 0;
+    color: #fff;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -.04em;
+    text-transform: uppercase;
+}
+
+.release-status {
+    margin: 8px 0 12px;
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+
+/* COUNTDOWN */
+
+.countdown-clock {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: min(100%, 470px);
+    margin: 0 auto 16px;
+    border-top: 1px solid rgba(255, 255, 255, .4);
+    border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
+.countdown-part {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9px 6px 8px;
+}
+
+.countdown-part:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 1px;
+    height: 60%;
+    background: rgba(255, 255, 255, .25);
+}
+
+.countdown-part strong {
+    color: #fff;
+    font-size: clamp(1.35rem, 4vw, 2rem);
+    font-weight: 900;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-part span {
+    margin-top: 5px;
+    color: rgba(255, 255, 255, .75);
+    font-size: .55rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+
+/* CTA */
+
+.release-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    margin-top: 0;
+}
+
+
+/* OUT NOW */
+
+.release-phase-out-now .release-status {
+    margin: 9px 0 17px;
+    color: var(--orange);
+    font-size: clamp(1rem, 3vw, 1.35rem);
+}
+
+
+/* LATEST RELEASE */
+
+.release-phase-latest .release-kicker {
+    margin-bottom: 7px;
+}
+
+.release-phase-latest .release-title {
+    margin-bottom: 16px;
+}
+
+
+/* SOCIALS IETS DICHTER BIJ RELEASE-BLOK */
+
+.release-campaign+.hero-socials {
+    margin-top: 25px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .release-campaign {
+        width: 100%;
+        margin-top: 22px;
+    }
+
+    .release-title {
+        font-size: clamp(2.5rem, 15vw, 3.7rem);
+    }
+
+    .countdown-clock {
+        width: 100%;
+    }
+
+    .countdown-part {
+        padding-inline: 3px;
+    }
+
+    .countdown-part strong {
+        font-size: 1.45rem;
+    }
+
+    .release-button {
+        min-width: 170px;
+    }
 }
