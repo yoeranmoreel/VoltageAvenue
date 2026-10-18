@@ -6199,9 +6199,16 @@ async function loadAnalytics() {
     try {
         const user = auth.currentUser;
         if (!user) throw new Error("Niet ingelogd");
+        status.textContent = "Firebase-sessie controleren…";
         const jwt = await user.getIdToken();
+        status.textContent = "Cloudflare Worker verbinden…";
         const days = document.querySelector("[data-analytics-period]")?.value || "7";
-        const res = await fetch(analyticsEndpoint + "?days=" + encodeURIComponent(days), {headers: {Authorization: "Bearer " + jwt},cache:"no-store"});
+        let res;
+        try {
+            res = await fetch(analyticsEndpoint + "?days=" + encodeURIComponent(days), {headers: {Authorization: "Bearer " + jwt},cache:"no-store"});
+        } catch (networkError) {
+            throw new Error("Browser blokkeert de verbinding met Cloudflare (netwerk/CORS). Website: " + location.origin + ". Controleer eventuele browserbeveiliging of adblocker. Details: " + networkError.message);
+        }
         if (!res.ok) throw new Error("Cloudflare koppeling niet beschikbaar (" + res.status + ")");
         const data = await res.json();
         for (const key of ["visits","pageviews","country"]) {
