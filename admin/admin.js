@@ -236,6 +236,8 @@ const adminPages =
 
 function openAdminPage(pageName) {
 
+    if (pageName === "analytics") { queueMicrotask(() => { void loadAnalytics(); }); }
+
     if (pageName === "show-mode") {
         queueMicrotask(() => {
             void prepareShowMode();
@@ -6178,3 +6180,44 @@ navigationButtons.forEach(
 // ========================================
 
 loadShopImages();
+
+
+// Analytics: the server endpoint is deliberately not configured until
+// a protected Cloudflare Worker is deployed. Never expose Cloudflare API tokens here.
+const analyticsEndpoint = "";
+async function loadAnalytics() {
+    const status = document.querySelector("[data-analytics-status]");
+    if (!status) return;
+    if (!analyticsEndpoint) {
+        status.textContent = "Dashboard voorbereid. De beveiligde Cloudflare API-koppeling moet nog worden aangesloten; bekijk tot die tijd je cijfers in Cloudflare Web Analytics.";
+        return;
+    }
+    status.textContent = "Statistieken ophalen…";
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Niet ingelogd");
+        const jwt = await user.getIdToken();
+        const days = document.querySelector("[data-analytics-period]")?.value || "7";
+        const res = await fetch(analyticsEndpoint + "?days=" + encodeURIComponent(days), {headers: {Authorization: "Bearer " + jwt},cache:"no-store"});
+        if (!res.ok) throw new Error("Cloudflare koppeling niet beschikbaar (" + res.status + ")");
+        const data = await res.json();
+        for (const key of ["visits","pageviews","country"]) {
+            const el = document.querySelector('[data-analytics-value="' + key + '"]');
+            if (el) el.textContent = data[key] ?? "—";
+        }
+        for (const [key,rows] of Object.entries({pages:data.pages,countries:data.countries,sources:data.sources})) {
+            const el = document.querySelector("[data-analytics-" + key + "]");
+            if (!el) continue;
+            el.replaceChildren();
+            if (!Array.isArray(rows) || !rows.length) {el.textContent="Geen gegevens";continue;}
+            for (const row of rows.slice(0,10)) {
+                const p = document.createElement("p");
+                p.textContent = String(row.name ?? "Overig") + " · " + String(row.value ?? 0);
+                el.append(p);
+            }
+        }
+        status.textContent = "Laatst opgehaald: " + new Date().toLocaleTimeString("nl-NL");
+    } catch (err) {status.textContent = "Ophalen mislukt: " + err.message;}
+}
+document.querySelector("[data-analytics-refresh]")?.addEventListener("click",loadAnalytics);
+document.querySelector("[data-analytics-period]")?.addEventListener("change",loadAnalytics);
