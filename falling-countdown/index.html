@@ -46,12 +46,18 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradi
 .footer a{color:#eee;text-decoration:none}
 a:focus-visible{outline:3px solid var(--amber);outline-offset:5px}
 @media(min-width:751px){
-.page{width:min(1220px,calc(100% - 64px));min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:24px 0}
-.layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,76px);align-items:center}
-.art-frame{width:min(100%,calc(100svh - 110px),580px);justify-self:end}
-.details{max-width:540px}
-.heading{font-size:clamp(4rem,7vw,7rem)}
-.footer{margin-top:18px}
+.page{width:min(1050px,calc(100% - 64px));min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:18px 0}
+.layout{display:flex;flex-direction:column;align-items:center;gap:0;width:100%}
+.art-frame{width:min(100%,calc(100svh - 270px),650px);margin:0 auto}
+.details{width:min(100%,650px);position:relative;z-index:5;text-align:center;margin-top:-112px}
+.details .meta,.details .heading,.details .sub.before{display:none}
+.count-label{display:inline-block;margin:0 0 6px;padding:5px 13px;background:#101116d9;color:var(--amber);text-shadow:0 1px 5px #000}
+.timer{width:min(94%,570px);margin:0 auto;padding:7px 12px;background:#101116e8;box-shadow:0 8px 30px #0007;backdrop-filter:blur(12px)}
+.unit{padding:9px 3px 8px}
+.num{font-size:clamp(1.7rem,3vw,2.4rem)}
+.details>.before{margin-top:27px}
+.details>.out{margin-top:35px}
+.footer{width:min(100%,650px);margin-top:20px}
 }
 @media(max-width:750px){.page{width:min(520px,calc(100% - 24px));padding-top:8px;padding-bottom:25px}.layout{grid-template-columns:1fr;gap:17px}.art-frame{width:min(100%,430px);margin:auto}.details{text-align:center}.heading{font-size:clamp(3.5rem,15vw,5.5rem);margin-bottom:9px}.meta{margin-bottom:8px}.sub{margin-bottom:15px}.count-label{margin-bottom:7px}.timer{max-width:470px;margin:0 auto 15px}.unit{padding:10px 2px 9px}.label{margin-top:5px}.footer{margin-top:24px}}
 @media(max-width:400px){.brand{font-size:.7rem}.top-note{font-size:.56rem}.art-frame{width:100%}.unit{padding:12px 2px}.num{font-size:1.6rem}.label{font-size:.5rem}.sub{margin-bottom:20px}}
