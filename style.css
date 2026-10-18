@@ -1982,3 +1982,54 @@ footer {
 .product-lightbox.is-zoomed .lightbox-image {
     overflow: auto;
 }ƒ
+
+/* ========================================
+   NAVIGATIE — MERCH COMING SOON
+======================================== */
+
+.navigation-coming-soon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 2px;
+    color: #aaa;
+    font-weight: 700;
+    cursor: default;
+    user-select: none;
+}
+
+.navigation-coming-soon-label {
+    opacity: .58;
+}
+
+.navigation-coming-soon-sticker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max-content;
+    padding: 3px 7px;
+    background: var(--orange);
+    color: var(--black);
+    border: 1px solid var(--black);
+    box-shadow: 2px 2px 0 #000;
+    font-family: Montserrat, Arial, sans-serif;
+    font-size: .55rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%) rotate(-7deg);
+}
+
+@media(max-width:850px) {
+    .navigation-coming-soon {
+        min-height: 50px;
+        padding: 12px;
+        border-bottom: 1px solid #ffffff18;
+    }
+
+    .navigation-coming-soon-sticker {
+        left: 72px;
+        transform: translate(-50%, -50%) rotate(-7deg);
+    }
+}
