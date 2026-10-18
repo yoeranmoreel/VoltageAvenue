@@ -660,7 +660,7 @@ const fallingRelease = {
     postReleaseDate: "2026-12-04T00:00:00+01:00",
 
     // Deze vullen we in zodra de links bekend zijn.
-    reminderUrl: "#",
+    reminderUrl: "https://41eef1c3.sibforms.com/serve/MUIFAHP5u-djS1_HnoPXvOcqrg9C9ppHNTxzup4aw9vC4L-8U4953dFuXNKW_omU1WtLKqDvpwDPacKMJaEzAjBXnfIRcKa1HY9SGqfZ6qCKIx7Oxpm1BemgvYpnA35bfKGXm6xZDRjAoe8PjM8e8dUibQM-LpPnyjejSQakT_zqTTOD0tLkHgAHJe_6yqsgVCbUskSvtvkKSMjZdA%3D%3D",
     spotifyUrl: "https://open.spotify.com/artist/5LbERo4SHiSSfuX3TbL9Qq"
 };
 
