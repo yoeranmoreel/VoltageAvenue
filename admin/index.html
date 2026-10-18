@@ -112,7 +112,7 @@
 
             <div>
                 <strong>Voltage Avenue</strong>
-                <span>Merch Admin</span>
+                <span>Band Admin</span>
             </div>
         </a>
 
@@ -220,6 +220,7 @@
                     </span>
                 </button>
 
+                <button class="admin-nav-item" type="button" data-admin-page="analytics"><span class="admin-nav-icon">◫</span><span>Analytics</span></button>
             </nav>
 
 
@@ -268,10 +269,20 @@
                             <span class="admin-dashboard-icon">⚡</span>
                             <span><strong>Show modus</strong><small>Open de merchkassa</small></span>
                         </button>
+                        <button class="admin-dashboard-tile" type="button" data-dashboard-go="analytics"><span class="admin-dashboard-icon">◫</span><strong>Analytics</strong><small>Website & Falling</small></button>
                     </div>
                 </div>
             </section>
 
+
+            <section class="admin-page" data-admin-content="analytics">
+              <div class="admin-page-header"><div><p class="admin-eyebrow">Voltage Avenue · Website</p><h1>Analytics</h1><p>Bezoekers, landen en verkeer van voltageavenue.online en de Falling-campagne.</p></div></div>
+              <div class="admin-analytics-toolbar"><label for="analytics-period">Periode</label><select id="analytics-period" data-analytics-period><option value="1">Vandaag</option><option value="7" selected>7 dagen</option><option value="30">30 dagen</option></select><button type="button" class="admin-button admin-button-secondary" data-analytics-refresh>↻ Verversen</button></div>
+              <p class="admin-analytics-status" data-analytics-status role="status">Analytics wordt geladen zodra de beveiligde koppeling beschikbaar is.</p>
+              <div class="admin-analytics-stats"><article><small>Bezoeken</small><strong data-analytics-value="visits">—</strong></article><article><small>Paginaweergaven</small><strong data-analytics-value="pageviews">—</strong></article><article><small>Topland</small><strong data-analytics-value="country">—</strong></article></div>
+              <div class="admin-analytics-grid"><article><h2>Populaire pagina's</h2><div data-analytics-pages>Geen gegevens beschikbaar.</div></article><article><h2>Landen</h2><div data-analytics-countries>Geen gegevens beschikbaar.</div></article><article><h2>Verkeersbronnen</h2><div data-analytics-sources>Geen gegevens beschikbaar.</div></article></div>
+              <p class="admin-muted">Bron: Cloudflare Web Analytics. Cijfers kunnen vertraagd binnenkomen. Klikmetingen op REMIND ME en Spotify worden nog niet apart geregistreerd.</p>
+            </section>
             <section class="admin-page" data-admin-content="orders">
                 <div class="admin-page-header">
                     <div>
