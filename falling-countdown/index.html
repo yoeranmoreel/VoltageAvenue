@@ -17,15 +17,17 @@ html{scroll-behavior:smooth}
 body{margin:0;min-height:100svh;background:var(--ink);color:var(--white);overflow-x:hidden}
 body::before{content:"";position:fixed;inset:-15%;z-index:-2;background:url("../assets/images/falling-artwork.jpeg") center/cover no-repeat;filter:blur(65px) brightness(.24) saturate(.75);transform:scale(1.12);pointer-events:none}
 body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#11121860,#111218d9 65%,#111218);pointer-events:none}
-.page{width:min(1100px,calc(100% - 36px));margin:auto;padding:24px 0 60px}
+.page{width:min(1100px,calc(100% - 36px));margin:auto;padding:28px 0 45px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:32px}
 .brand{font-size:.85rem;font-weight:900;letter-spacing:.16em;text-decoration:none;color:#fff}
 .top-note{font-size:.64rem;letter-spacing:.18em;font-weight:800;color:var(--amber);text-align:right}
 .layout{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,1fr);gap:clamp(30px,5vw,75px);align-items:center}
 .art-frame{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:1;box-shadow:0 24px 90px #000a,0 0 0 1px #ffffff26}
-.art-frame::after{content:"";position:absolute;inset:0;border:1px solid #ffffff18;pointer-events:none}
-.art{width:100%;height:100%;display:block;object-fit:contain;animation:breathe 18s ease-in-out infinite alternate;transform-origin:center}
-@keyframes breathe{from{transform:scale(1)}to{transform:scale(1.055)}}
+.art-frame::before{content:"";position:absolute;inset:-5%;z-index:2;pointer-events:none;background:linear-gradient(110deg,transparent 10%,#ffc58b32 28%,transparent 43%,transparent 62%,#ffc58b20 83%,transparent 96%);mix-blend-mode:screen;animation:edgeLight 13s ease-in-out infinite alternate}
+.art-frame::after{content:"";position:absolute;inset:0;z-index:3;border:1px solid #ffffff25;box-shadow:inset 0 0 32px #f6a75b17,inset 0 0 7px #ffc98b35;pointer-events:none}
+@keyframes edgeLight{0%{opacity:.22;transform:translateX(-9%)}50%{opacity:.55}100%{opacity:.32;transform:translateX(9%)}}
+.art{width:100%;height:100%;display:block;object-fit:contain;animation:breathe 16s ease-in-out infinite alternate;transform-origin:center;will-change:transform}
+@keyframes breathe{0%{transform:scale(1.015) translateX(-.3%)}50%{transform:scale(1.075) translateX(1.2%)}100%{transform:scale(1.13) translateX(-1.2%)}}
 .meta{font-size:.72rem;font-weight:900;letter-spacing:.28em;color:var(--amber);margin:0 0 12px}
 .heading{font-size:clamp(3.6rem,8vw,7.2rem);font-weight:900;letter-spacing:-.08em;line-height:.9;margin:0 0 15px}
 .sub{font-size:.75rem;letter-spacing:.2em;line-height:1.7;font-weight:800;color:#e9e3df;margin:0 0 28px}
@@ -43,14 +45,13 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradi
 .footer{margin-top:42px;padding-top:18px;border-top:1px solid #ffffff25;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#aaa5a5;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase}
 .footer a{color:#eee;text-decoration:none}
 a:focus-visible{outline:3px solid var(--amber);outline-offset:5px}
-@media(max-width:750px){.page{width:min(520px,calc(100% - 32px));padding-top:20px}.topbar{margin-bottom:23px}.layout{grid-template-columns:1fr;gap:28px}.art-frame{width:min(100%,430px);margin:auto}.details{text-align:center}.heading{font-size:clamp(3.5rem,15vw,5.5rem)}.timer{max-width:470px;margin:0 auto 24px}.footer{margin-top:36px}}
-@media(max-width:400px){.brand{font-size:.7rem}.top-note{font-size:.56rem}.art-frame{width:min(100%,330px)}.unit{padding:12px 2px}.num{font-size:1.6rem}.label{font-size:.5rem}.sub{margin-bottom:20px}}
-@media(prefers-reduced-motion:reduce){.art{animation:none}.button{transition:none}}
+@media(max-width:750px){.page{width:min(520px,calc(100% - 24px));padding-top:8px;padding-bottom:25px}.layout{grid-template-columns:1fr;gap:17px}.art-frame{width:min(100%,430px);margin:auto}.details{text-align:center}.heading{font-size:clamp(3.5rem,15vw,5.5rem);margin-bottom:9px}.meta{margin-bottom:8px}.sub{margin-bottom:15px}.count-label{margin-bottom:7px}.timer{max-width:470px;margin:0 auto 15px}.unit{padding:10px 2px 9px}.label{margin-top:5px}.footer{margin-top:24px}}
+@media(max-width:400px){.brand{font-size:.7rem}.top-note{font-size:.56rem}.art-frame{width:100%}.unit{padding:12px 2px}.num{font-size:1.6rem}.label{font-size:.5rem}.sub{margin-bottom:20px}}
+@media(prefers-reduced-motion:reduce){.art,.art-frame::before{animation:none}.button{transition:none}}
 </style>
 </head>
 <body>
 <main class="page" id="page">
-<header class="topbar"><a class="brand" href="../">VOLTAGE AVENUE</a><span class="top-note">NEW SINGLE · 20.11.26</span></header>
 <div class="layout">
 <div class="art-frame"><img class="art" src="../assets/images/falling-artwork.jpeg" alt="Original Falling single artwork by Voltage Avenue" width="1200" height="1200" fetchpriority="high"></div>
 <section class="details" aria-label="Falling release countdown">
