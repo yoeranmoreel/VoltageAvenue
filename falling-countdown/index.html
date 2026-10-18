@@ -96,11 +96,46 @@ a:focus-visible{outline:3px solid #ffd5a4;outline-offset:5px}
 .artwork,.art-shine,.art-shell::before,.aura,.beam,.speck{animation:none!important}
 .button{transition:none}
 }
+
+/* FALLING — THE RELEASE EVENT */
+body{background:radial-gradient(ellipse at 50% 30%,#693c2a 0%,#30201e 28%,#110f15 65%,#07070b 100%)}
+.scene::before{filter:blur(52px) brightness(.34) saturate(1.35);opacity:.85;animation:backdropBreath 14s ease-in-out infinite alternate}
+.scene::after{background:radial-gradient(ellipse at 50% 38%,transparent 13%,#0b0b1040 57%,#08080bb8 100%)}
+.aura{background:radial-gradient(ellipse,#ffb15a70 0%,#e86d3c44 26%,#f9a15319 48%,transparent 70%);filter:blur(40px);animation:auraPulse 7s ease-in-out infinite alternate}
+.arc{border-width:3px;border-color:#ffad6580;box-shadow:0 0 15px #ff99485a,inset 0 0 22px #ff994827;animation:orbitGlow 15s ease-in-out infinite alternate}
+.arc-two{border-color:#ff994f66;animation-delay:-8s}
+.beam{width:55vw;opacity:.6;filter:blur(14px);background:linear-gradient(90deg,transparent 0%,#ffb45c05 27%,#ffad5c58 49%,#ffc87815 52%,transparent 80%);animation:beamDrift 10s ease-in-out infinite alternate}
+.beam-left{left:-8vw}.beam-right{right:-10vw}
+.art-shell::before{inset:-32px;background:conic-gradient(from 20deg,#ffae6200,#ffae628c,#ffae6200,#ffca7e88,#ffae6200);filter:blur(30px);opacity:1;animation:haloTurn 19s linear infinite}
+.art-shell::after{box-shadow:inset 0 0 0 1px #ffe0aa,0 0 6px #ffc075c7,0 0 35px #ff964d99,0 0 90px #f67b4266}
+.art-shine{background:linear-gradient(105deg,transparent 20%,#fff1c514 28%,transparent 35%,transparent 65%,#ffbb692c 81%,transparent 92%);animation:shine 9s ease-in-out infinite alternate}
+.count-panel{border:1px solid #ffd8ac91;background:linear-gradient(125deg,#1b1517b3,#08080dc9);box-shadow:0 16px 50px #000c,0 0 30px #f9a65b48,inset 0 1px #ffe5c17d}
+.button{background:linear-gradient(115deg,#ffa44c,#ffcf86,#ffab58);background-size:220% 100%;animation:buttonGlow 4s ease-in-out infinite alternate;box-shadow:0 0 28px #ffa45d99,0 0 65px #ff924345,0 10px 25px #0009}
+.speck{box-shadow:0 0 10px 3px #ffb466bd;animation:floatUp var(--t) ease-in-out infinite alternate,emberBlink 3.5s ease-in-out infinite alternate}
+@keyframes backdropBreath{from{transform:scale(1.13) rotate(-2deg);opacity:.62}to{transform:scale(1.24) rotate(2deg);opacity:.92}}
+@keyframes orbitGlow{from{opacity:.32;filter:blur(1px)}to{opacity:.95;filter:blur(0)}}
+@keyframes buttonGlow{from{background-position:0% 50%;box-shadow:0 0 20px #ffa45d80,0 0 42px #ff92432e}to{background-position:100% 50%;box-shadow:0 0 40px #ffa45dca,0 0 85px #ff92436e}}
+@keyframes emberBlink{0%,100%{filter:brightness(.6)}50%{filter:brightness(2.2)}}
+.light-burst{position:absolute;z-index:0;left:50%;top:36%;width:min(110vw,1100px);height:min(110vw,1100px);transform:translate(-50%,-50%);background:repeating-conic-gradient(from 12deg,#ffb15c00 0deg,#ffb15c0a 2deg,#ffb15c00 7deg,#ffb15c00 22deg);mask-image:radial-gradient(circle,transparent 16%,black 38%,transparent 69%);opacity:.9;animation:burstTurn 65s linear infinite}
+@keyframes burstTurn{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.light-streak{position:absolute;height:2px;width:38vw;max-width:500px;background:linear-gradient(90deg,transparent,#ffba72a6,#fff1c5,transparent);box-shadow:0 0 12px #ff9e52,0 0 26px #ff9e5266;opacity:.65;transform:rotate(-27deg);animation:streakFloat 9s ease-in-out infinite alternate}
+.streak-one{top:22%;left:-13%}.streak-two{bottom:24%;right:-14%;transform:rotate(-27deg);animation-delay:-5s}
+@keyframes streakFloat{from{opacity:.2;translate:-30px 25px}to{opacity:.85;translate:35px -25px}}
+@media(max-width:750px){
+.aura{top:30%;width:140vw;height:140vw}
+.light-burst{top:25%;width:170vw;height:170vw}
+.arc-one{left:-92vw;top:-70vw}.arc-two{right:-125vw;bottom:-80vw}
+.light-streak{width:50vw}
+.art-shell::before{inset:-19px;filter:blur(22px)}
+}
+@media(prefers-reduced-motion:reduce){
+.scene::before,.arc,.light-burst,.light-streak,.button,.speck{animation:none!important}
+}
 </style>
 </head>
 <body>
 <div class="scene" aria-hidden="true">
-<div class="aura"></div><div class="arc arc-one"></div><div class="arc arc-two"></div>
+<div class="aura"></div><div class="light-burst"></div><div class="light-streak streak-one"></div><div class="light-streak streak-two"></div><div class="arc arc-one"></div><div class="arc arc-two"></div>
 <div class="beam beam-left"></div><div class="beam beam-right"></div>
 <div class="specks">
 <span class="speck" style="--x:6%;--y:17%;--s:2px;--o:.55;--t:8s;--d:-2s"></span>
