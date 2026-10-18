@@ -142,6 +142,39 @@ body{background:radial-gradient(ellipse at 50% 30%,#693c2a 0%,#30201e 28%,#110f1
 @keyframes emberAcross{from{transform:translate(-9px,15px) scale(.65);opacity:.12}to{transform:translate(13px,-22px) scale(1.2);opacity:.85}}
 @media(max-width:750px){.art-atmosphere::before{filter:blur(10px)}.art-atmosphere::after{filter:blur(13px)}}
 @media(prefers-reduced-motion:reduce){.art-atmosphere::before,.art-atmosphere::after,.art-ember{animation:none!important}}
+
+/* MOBILE GPU PERFORMANCE: static atmosphere, animated composited foreground */
+@media(max-width:750px){
+.scene::before{animation:none;filter:blur(34px) brightness(.32);transform:scale(1.13)}
+.aura{animation:none;filter:blur(26px);opacity:.9}
+.arc,.beam,.light-burst,.light-streak{animation:none}
+.beam{filter:blur(9px);opacity:.28}
+.art-shell::before{animation:none;filter:blur(17px);opacity:.95}
+.artwork{animation:mobileArt 22s ease-in-out infinite alternate;will-change:transform}
+.art-shine{animation:none;opacity:.5}
+.art-atmosphere{z-index:3;overflow:hidden}
+.art-atmosphere::before{
+inset:-12%;filter:none;mix-blend-mode:screen;
+background:linear-gradient(115deg,transparent 32%,#ffbd7800 39%,#ffe4af6b 49%,#ffb56524 53%,transparent 63%);
+animation:mobileLightPass 9s ease-in-out infinite alternate;will-change:transform,opacity
+}
+.art-atmosphere::after{
+filter:none;mix-blend-mode:screen;
+background:radial-gradient(ellipse at 0% 70%,#ffad5d85,transparent 40%),radial-gradient(ellipse at 100% 20%,#ffc17a65,transparent 40%);
+animation:mobileEdgeGlow 8s ease-in-out infinite alternate;will-change:opacity
+}
+.art-ember{animation:mobileEmber var(--duration) ease-in-out infinite alternate;will-change:transform,opacity;box-shadow:0 0 7px 2px #ffa85d}
+.speck{animation:none;box-shadow:0 0 5px #ffb466}
+.button{animation:none;background:#ffb36a;box-shadow:0 0 23px #ffa45d85,0 7px 22px #0008}
+.count-panel{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(125deg,#1b1517c2,#08080dd8);box-shadow:0 12px 30px #0009,0 0 17px #f9a65b30}
+}
+@keyframes mobileArt{from{transform:translate3d(-.5%,0,0) scale(1.018)}to{transform:translate3d(.6%,-.3%,0) scale(1.055)}}
+@keyframes mobileLightPass{from{transform:translate3d(-48%,0,0);opacity:.2}to{transform:translate3d(42%,0,0);opacity:.85}}
+@keyframes mobileEdgeGlow{from{opacity:.25}to{opacity:.95}}
+@keyframes mobileEmber{from{transform:translate3d(-7px,11px,0);opacity:.18}to{transform:translate3d(9px,-18px,0);opacity:.85}}
+@media(max-width:750px) and (prefers-reduced-motion:reduce){
+.artwork,.art-atmosphere::before,.art-atmosphere::after,.art-ember{animation:none}
+}
 </style>
 </head>
 <body>
