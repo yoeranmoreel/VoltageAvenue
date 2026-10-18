@@ -1988,11 +1988,9 @@ footer {
 ======================================== */
 
 .navigation-coming-soon {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 64px;
+    display: inline-grid;
+    place-items: center;
+    min-width: 76px;
     padding: 10px 2px;
     color: #aaa;
     font-weight: 700;
@@ -2000,14 +1998,17 @@ footer {
     user-select: none;
 }
 
+.navigation-coming-soon-label,
+.navigation-coming-soon-sticker {
+    grid-area: 1 / 1;
+}
+
 .navigation-coming-soon-label {
     opacity: .58;
 }
 
 .navigation-coming-soon-sticker {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    z-index: 1;
     width: max-content;
     padding: 3px 7px;
     background: var(--orange);
@@ -2020,19 +2021,26 @@ footer {
     line-height: 1;
     letter-spacing: .06em;
     text-transform: uppercase;
-    transform: translate(-50%, -50%) rotate(-7deg);
+    transform: rotate(-7deg);
     pointer-events: none;
 }
 
 @media(max-width:850px) {
     .navigation-coming-soon {
+        display: grid;
+        justify-content: start;
         min-height: 50px;
         padding: 12px;
         border-bottom: 1px solid #ffffff18;
     }
 
+    .navigation-coming-soon-label,
     .navigation-coming-soon-sticker {
-        left: 72px;
-        transform: translate(-50%, -50%) rotate(-7deg);
+        grid-area: 1 / 1;
+    }
+
+    .navigation-coming-soon-sticker {
+        margin-left: 10px;
+        transform: rotate(-7deg);
     }
 }
