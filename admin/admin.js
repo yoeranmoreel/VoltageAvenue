@@ -206,7 +206,7 @@ onAuthStateChanged(
                 !user;
         }
 
-        const analyticsAllowed = Boolean(user && user.email && user.email.toLowerCase() !== "merch@voltageavenue.nl");
+        const analyticsAllowed = Boolean(user && user.email && user.uid === "5Jwg29pogDOoCQnUYIPv04vLT8j2");
         document.querySelectorAll("[data-analytics-admin-only]").forEach((element) => { element.hidden = !analyticsAllowed; });
         if (user) {
             openAdminPage("dashboard");
@@ -237,7 +237,7 @@ const adminPages =
 // ========================================
 
 function openAdminPage(pageName) {
-    if (pageName === "analytics" && (!auth.currentUser?.email || auth.currentUser.email.toLowerCase() === "merch@voltageavenue.nl")) return;
+    if (pageName === "analytics" && auth.currentUser?.uid !== "5Jwg29pogDOoCQnUYIPv04vLT8j2") return;
 
     if (pageName === "analytics") { queueMicrotask(() => { void loadAnalytics(); }); }
 
@@ -6187,7 +6187,7 @@ loadShopImages();
 
 // Analytics: the server endpoint is deliberately not configured until
 // a protected Cloudflare Worker is deployed. Never expose Cloudflare API tokens here.
-const analyticsEndpoint = "";
+const analyticsEndpoint = "https://voltage-analytics-api.voltageavenue-primary.workers.dev";
 async function loadAnalytics() {
     const status = document.querySelector("[data-analytics-status]");
     if (!status) return;
