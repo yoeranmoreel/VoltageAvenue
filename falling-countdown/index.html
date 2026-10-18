@@ -131,6 +131,17 @@ body{background:radial-gradient(ellipse at 50% 30%,#693c2a 0%,#30201e 28%,#110f1
 @media(prefers-reduced-motion:reduce){
 .scene::before,.arc,.light-burst,.light-streak,.button,.speck{animation:none!important}
 }
+
+/* FOREGROUND ATMOSPHERE — LIGHT AND EMBERS IN FRONT OF THE ART */
+.art-atmosphere{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;isolation:isolate}
+.art-atmosphere::before{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 27%,#ffd59a00 37%,#ffbb7340 47%,#fff0ce23 49%,#ffb86c00 58%,transparent 70%);mix-blend-mode:screen;filter:blur(14px);animation:foregroundSweep 11s ease-in-out infinite alternate}
+.art-atmosphere::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 3% 72%,#ff9e465c,transparent 37%),radial-gradient(ellipse at 97% 19%,#ffbc6454,transparent 34%);mix-blend-mode:screen;filter:blur(18px);animation:foregroundGlow 7s ease-in-out infinite alternate}
+.art-ember{position:absolute;z-index:2;left:var(--x);top:var(--y);width:var(--size);height:var(--size);border-radius:50%;background:#ffdfab;box-shadow:0 0 8px 3px #ffa85d,0 0 20px #ff9b49;opacity:.7;animation:emberAcross var(--duration) ease-in-out infinite alternate;animation-delay:var(--delay)}
+@keyframes foregroundSweep{from{transform:translateX(-33%) rotate(-5deg);opacity:.24}to{transform:translateX(30%) rotate(4deg);opacity:.85}}
+@keyframes foregroundGlow{from{opacity:.3}to{opacity:.95}}
+@keyframes emberAcross{from{transform:translate(-9px,15px) scale(.65);opacity:.12}to{transform:translate(13px,-22px) scale(1.2);opacity:.85}}
+@media(max-width:750px){.art-atmosphere::before{filter:blur(10px)}.art-atmosphere::after{filter:blur(13px)}}
+@media(prefers-reduced-motion:reduce){.art-atmosphere::before,.art-atmosphere::after,.art-ember{animation:none!important}}
 </style>
 </head>
 <body>
@@ -156,6 +167,14 @@ body{background:radial-gradient(ellipse at 50% 30%,#693c2a 0%,#30201e 28%,#110f1
 <div class="art-mask">
 <img class="artwork" src="../assets/images/falling-artwork.jpeg" alt="Falling — original Voltage Avenue single artwork" width="1200" height="1200" fetchpriority="high">
 <div class="art-shine" aria-hidden="true"></div>
+<div class="art-atmosphere" aria-hidden="true">
+<span class="art-ember" style="--x:8%;--y:72%;--size:3px;--duration:6s;--delay:-2s"></span>
+<span class="art-ember" style="--x:15%;--y:28%;--size:2px;--duration:9s;--delay:-6s"></span>
+<span class="art-ember" style="--x:26%;--y:85%;--size:3px;--duration:8s;--delay:-3s"></span>
+<span class="art-ember" style="--x:69%;--y:17%;--size:2px;--duration:7s;--delay:-4s"></span>
+<span class="art-ember" style="--x:88%;--y:64%;--size:3px;--duration:10s;--delay:-7s"></span>
+<span class="art-ember" style="--x:95%;--y:38%;--size:2px;--duration:8s;--delay:-5s"></span>
+</div>
 </div>
 </div>
 <section class="release" aria-label="Falling release countdown">
