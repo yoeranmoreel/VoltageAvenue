@@ -10,7 +10,20 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js?v=20261018-reminder" defer></script>
 <!-- Cloudflare Web Analytics -->
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"316303818ef94f029bd0752fa2da763d"}'></script>
+<script>
+(function () {
+    // Load analytics only on the production website, never on local or preview pages.
+    if ((location.protocol !== "https:" && location.protocol !== "http:") ||
+        (location.hostname !== "voltageavenue.online" && location.hostname !== "www.voltageavenue.online")) {
+        return;
+    }
+    var beacon = document.createElement("script");
+    beacon.defer = true;
+    beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    beacon.setAttribute("data-cf-beacon", '{"token":"316303818ef94f029bd0752fa2da763d"}');
+    document.head.appendChild(beacon);
+})();
+</script>
 <!-- End Cloudflare Web Analytics -->
 </head>
 
