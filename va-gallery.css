@@ -1,0 +1,22 @@
+/* Voltage Avenue — horizontale mozaiekreel; gebruikt bestaande foto's */
+#galerij .section-inner{max-width:none;width:100%;padding-inline:0}
+#galerij .section-inner>h2,#galerij .section-inner>.eyebrow,#galerij .section-inner>p,#galerij .section-inner>.text-link{display:block;width:min(1100px,calc(100% - 40px));margin-left:auto;margin-right:auto}
+.va-reel-viewport{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-inline:contain;touch-action:pan-x pan-y;outline-offset:-4px}
+.va-reel-viewport::-webkit-scrollbar{display:none}
+.va-reel-track{display:flex;width:max-content;align-items:stretch}
+.va-reel-set{display:flex;flex:none;gap:10px;padding-right:10px}
+.va-reel-panel{width:clamp(300px,35vw,490px);height:clamp(280px,29vw,390px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));grid-auto-flow:dense;gap:8px;flex:none}
+.va-reel-tile{display:block;min-width:0;min-height:0;padding:0;border:0;background:#191919;overflow:hidden;cursor:zoom-in;position:relative}
+.va-reel-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease,filter .3s ease}
+.va-reel-tile:hover img{transform:scale(1.07);filter:brightness(1.12)}
+.va-reel-tile:focus-visible{outline:3px solid #ff8c32;outline-offset:-3px;z-index:1}
+.va-reel-large{grid-column:span 2;grid-row:span 2}
+.va-reel-tall{grid-row:span 2}
+.va-reel-controls{display:flex;justify-content:center;gap:12px;margin:20px auto 0}
+.va-reel-controls button{background:#222;border:1px solid #ffffff4a;color:#fff;padding:9px 17px;min-width:48px;cursor:pointer;font:inherit;border-radius:4px}
+.va-reel-controls button:hover{border-color:#ff8c32;color:#ff8c32}
+.va-bio-photo{margin:38px 0 0;max-width:780px}.va-bio-photo img{display:block;width:100%;height:auto;max-height:440px;object-fit:cover}
+.va-photo-modal[hidden]{display:none!important}.va-photo-modal{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;gap:12px;padding:64px 18px 32px}
+.va-photo-modal figure{margin:0;max-width:min(82vw,1200px);max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}.va-photo-modal figure img{display:block;max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain}.va-photo-modal figcaption{margin-top:12px;color:#ddd;font-size:14px}
+.va-photo-modal button{background:#222b;color:white;border:1px solid #fff5;border-radius:50%;width:44px;height:44px;flex:none;font-size:30px;cursor:pointer}.va-photo-modal button:hover{background:#ff8c32;color:#111}.va-photo-close{position:absolute;right:20px;top:18px}.va-gallery-open{overflow:hidden}
+@media(max-width:600px){.va-reel-panel{width:300px;height:280px;gap:5px}.va-reel-set{gap:6px;padding-right:6px}.va-photo-modal{gap:4px;padding:64px 8px 25px}.va-photo-modal button{width:34px;height:34px;font-size:25px}.va-photo-modal figure{max-width:calc(100vw - 88px)}}
